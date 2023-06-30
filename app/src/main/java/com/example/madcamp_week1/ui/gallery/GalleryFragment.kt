@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.madcamp_week1.databinding.FragmentGalleryBinding
+
 
 class GalleryFragment : Fragment() {
 
@@ -17,21 +18,34 @@ class GalleryFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    var photolist = arrayListOf<Photo3>(
+        Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
+        Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
+        Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
+        Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
+        Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
+        Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
+
+    )
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         val galleryViewModel =
-            ViewModelProvider(this).get(GalleryViewModel::class.java)
+            ViewModelProvider(this)[GalleryViewModel::class.java]
 
         _binding = FragmentGalleryBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textGallery
-        galleryViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        val lm = LinearLayoutManager(context)
+        binding.galleryList.layoutManager = lm
+        binding.galleryList.setHasFixedSize(true)
+
+        val adt = GalleryListAdapter(requireContext(), photolist)
+        binding.galleryList.adapter = adt
+
         return root
     }
 
