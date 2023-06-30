@@ -9,46 +9,29 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.madcamp_week1.databinding.FragmentContactBinding
-
-class TestData(
-    private var name: String? = null,
-    private var phoneNumber: String? = null
-) {
-    fun getName(): String? {
-        return name
-    }
-    fun setName(name: String) {
-        this.name = name
-    }
-    fun getPhoneNumber(): String? {
-        return phoneNumber
-    }
-    fun setPhoneNumber(phoneNumber: String) {
-        this.phoneNumber = phoneNumber
-    }
-}
+import com.example.madcamp_week1.db.ContactData
 
 class ContactFragment : Fragment() {
-    var dataList: ArrayList<TestData> = arrayListOf(
-        TestData("AAA", "010-1111-1111"),
-        TestData("BBB", "010-1111-2222"),
-        TestData("CCC", "010-1111-3333"),
-        TestData("DDD", "010-1111-4444"),
-        TestData("EEE", "010-1111-5555"),
-        TestData("FFF", "010-1111-6666"),
-        TestData("GGG", "010-1111-7777"),
-        TestData("HHH", "010-1111-8888"),
-        TestData("III", "010-1111-9999"),
-        TestData("JJJ", "010-1111-0000"),
-        TestData("KKK", "010-2222-2222"),
-        TestData("LLL", "010-2222-3333"),
-        TestData("MMM", "010-2222-4444"),
-        TestData("NNN", "010-2222-5555"),
-        TestData("OOO", "010-2222-6666"),
-        TestData("PPP", "010-2222-7777"),
-        TestData("QQQ", "010-2222-8888"),
-        TestData("RRR", "010-2222-9999"),
-        TestData("SSS", "010-2222-0000")
+    var dataList: ArrayList<ContactData> = arrayListOf(
+        ContactData("AAA", "010-1111-1111"),
+        ContactData("BBB", "010-1111-2222"),
+        ContactData("CCC", "010-1111-3333"),
+        ContactData("DDD", "010-1111-4444"),
+        ContactData("EEE", "010-1111-5555"),
+        ContactData("FFF", "010-1111-6666"),
+        ContactData("GGG", "010-1111-7777"),
+        ContactData("HHH", "010-1111-8888"),
+        ContactData("III", "010-1111-9999"),
+        ContactData("JJJ", "010-1111-0000"),
+        ContactData("KKK", "010-2222-2222"),
+        ContactData("LLL", "010-2222-3333"),
+        ContactData("MMM", "010-2222-4444"),
+        ContactData("NNN", "010-2222-5555"),
+        ContactData("OOO", "010-2222-6666"),
+        ContactData("PPP", "010-2222-7777"),
+        ContactData("QQQ", "010-2222-8888"),
+        ContactData("RRR", "010-2222-9999"),
+        ContactData("SSS", "010-2222-0000")
     )
 
     private var _binding: FragmentContactBinding? = null
@@ -63,7 +46,7 @@ class ContactFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val homeViewModel =
-            ViewModelProvider(this).get(ContactViewModel::class.java)
+            ViewModelProvider(this)
 
         _binding = FragmentContactBinding.inflate(inflater, container, false)
 
@@ -77,7 +60,6 @@ class ContactFragment : Fragment() {
 //        homeViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
 //        }
-
 
         return root
     }
