@@ -7,9 +7,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.madcamp_week1.databinding.FragmentReservationBinding
+import com.example.madcamp_week1.db.ReservationData
+import com.example.madcamp_week1.db.ReservationList
 
 class ReservationFragment : Fragment() {
+    private var dataList: ArrayList<ReservationData> = ReservationList
 
     private var _binding: FragmentReservationBinding? = null
 
@@ -23,15 +27,20 @@ class ReservationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val reservationViewModel =
-            ViewModelProvider(this).get(ReservationViewModel::class.java)
+            ViewModelProvider(this)
 
         _binding = FragmentReservationBinding.inflate(inflater, container, false)
+
+        binding.rcvReservationList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.rcvReservationList.setHasFixedSize(true)
+        binding.rcvReservationList.adapter = ReservationListAdapter(dataList)
+
         val root: View = binding.root
 
-        val textView: TextView = binding.textLikes
-        reservationViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+//        val textView: TextView = binding.textLikes
+//        reservationViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
         return root
     }
 
