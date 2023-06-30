@@ -1,11 +1,13 @@
 package com.example.madcamp_week1.ui.gallery
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week1.R
+import com.example.madcamp_week1.ui.contact.ContactDetailActivity
 
 class GalleryListAdapter(private val context: android.content.Context, private val p3list: ArrayList<Photo3>) :
     RecyclerView.Adapter<GalleryListAdapter.Holder>()
@@ -17,7 +19,7 @@ class GalleryListAdapter(private val context: android.content.Context, private v
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.bind(p3list[position], context)
+        holder.bind(p3list[position], context, position)
     }
 
     override fun getItemCount(): Int {
@@ -29,31 +31,51 @@ class GalleryListAdapter(private val context: android.content.Context, private v
         private val p2: ImageView = itemView.findViewById<ImageView>(R.id.photo2)
         private val p3: ImageView = itemView.findViewById<ImageView>(R.id.photo3)
 
-        fun bind(photo_set: Photo3, context: android.content.Context) {
+        fun bind(photo_set: Photo3, context: android.content.Context, position: Int) {
+            val resId1 = context.resources.getIdentifier(photo_set.p1, "drawable", context.packageName)
             if (!photo_set.p1.isNullOrEmpty()) {
-                val resId = context.resources.getIdentifier(photo_set.p1, "drawable", context.packageName)
-                p1.setImageResource(resId)
+                p1.setImageResource(resId1)
             } else {
                 p1.setImageResource(R.mipmap.ic_launcher)
             }
 
+            val resId2 = context.resources.getIdentifier(photo_set.p2, "drawable", context.packageName)
             if (!photo_set.p2.isNullOrEmpty()) {
-                val resId = context.resources.getIdentifier(photo_set.p2, "drawable", context.packageName)
-                p2.setImageResource(resId)
+                p2.setImageResource(resId2)
             } else {
                 p2.setImageResource(R.mipmap.ic_launcher)
             }
 
+            val resId3 = context.resources.getIdentifier(photo_set.p3, "drawable", context.packageName)
             if (!photo_set.p3.isNullOrEmpty()) {
-                val resId = context.resources.getIdentifier(photo_set.p3, "drawable", context.packageName)
-                p3.setImageResource(resId)
+                p3.setImageResource(resId3)
             } else {
                 p3.setImageResource(R.mipmap.ic_launcher)
             }
 
-//            p1.setOnClickListener {
-//
-//            }
+            p1.setOnClickListener {
+                Intent(context, GalleryDetailActivity::class.java).apply {
+                    putExtra("galleryData1", resId1)
+                    putExtra("galleryData2", position * 3)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }.run { context.startActivity(this) }
+            }
+
+            p2.setOnClickListener {
+                Intent(context, GalleryDetailActivity::class.java).apply {
+                    putExtra("galleryData1", resId2)
+                    putExtra("galleryData2", position * 3 + 1)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }.run { context.startActivity(this) }
+            }
+
+            p3.setOnClickListener {
+                Intent(context, GalleryDetailActivity::class.java).apply {
+                    putExtra("galleryData1", resId3)
+                    putExtra("galleryData2", position * 3 + 2)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }.run { context.startActivity(this) }
+            }
         }
     }
 }

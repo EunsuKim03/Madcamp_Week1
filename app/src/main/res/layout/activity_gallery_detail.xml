@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:id="@+id/ll_profile_detail"
+        android:id="@+id/gallery_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -15,38 +15,44 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/iv_contact_detail_profile"
-            android:layout_width="350dp"
-            android:layout_height="350dp"
-            android:src="@drawable/ic_contact_profile"
-            android:layout_marginBottom="4dp"
+            android:id="@+id/gallery_detail_photo"
+            android:layout_width="330dp"
+            android:layout_height="330dp"
+            android:src="@drawable/ic_gallery_food"
+            android:layout_marginBottom="30dp"
             />
 
         <TextView
-            android:id="@+id/tv_contact_detail_name"
+            android:id="@+id/gallery_detail_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="30sp"
+            android:textColor="#000000"
+            android:textAlignment="center"
+            android:layout_marginBottom="10dp"/>
+
+
+        <TextView
+            android:id="@+id/gallery_detail_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize="20sp"
             android:textColor="#000000"
-            android:textAlignment="center"
-            android:layout_marginBottom="8dp"/>
-<!--            android:layout_marginStart="16dp"-->
-<!--            android:layout_marginEnd="16dp"-->
-<!--            android:layout_marginTop="4dp"-->
-
-<!--            />-->
-
+            android:drawableStart="@drawable/ic_gallery_map"
+            android:drawablePadding="20dp"
+            />
 
         <TextView
-            android:id="@+id/tv_contact_detail_phonenum"
+            android:id="@+id/gallery_detail_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize="20sp"
             android:textColor="#000000"
             android:drawableStart="@drawable/ic_contact_call"
-            android:drawablePadding="16dp"
+            android:drawablePadding="30dp"
             />
 
     </LinearLayout>
