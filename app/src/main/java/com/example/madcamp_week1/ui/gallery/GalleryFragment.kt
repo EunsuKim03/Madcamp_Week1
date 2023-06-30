@@ -19,7 +19,7 @@ class GalleryFragment : Fragment() {
     private val binding get() = _binding!!
 
     var photolist = arrayListOf<Photo3>(
-        Photo3("ic_gallery_food", "ic_gallery_food", "eat_my_thai"),
+        Photo3("ic_gallery_food", "ic_gallery_food", "photo_eatmythai"),
         Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
         Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
         Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
