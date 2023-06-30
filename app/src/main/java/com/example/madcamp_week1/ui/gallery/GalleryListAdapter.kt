@@ -12,7 +12,7 @@ class GalleryListAdapter(private val context: android.content.Context, private v
 {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view = LayoutInflater.from(context).inflate(R.layout.photo3, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.gallery_item_list, parent, false)
         return Holder(view)
     }
 
