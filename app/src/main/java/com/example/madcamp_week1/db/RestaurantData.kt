@@ -4,4 +4,4 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class RestaurantData(val name: String, val resPhone: String, val address: String) : Parcelable
+data class RestaurantData(val name: String, val photoName: String, val resPhone: String, val address: String) : Parcelable

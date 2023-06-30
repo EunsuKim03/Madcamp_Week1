@@ -4,35 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.madcamp_week1.databinding.FragmentContactBinding
 import com.example.madcamp_week1.db.ContactData
+import com.example.madcamp_week1.db.ContactList
 
 class ContactFragment : Fragment() {
-    var dataList: ArrayList<ContactData> = arrayListOf(
-        ContactData("AAA", "010-1111-1111"),
-        ContactData("BBB", "010-1111-2222"),
-        ContactData("CCC", "010-1111-3333"),
-        ContactData("DDD", "010-1111-4444"),
-        ContactData("EEE", "010-1111-5555"),
-        ContactData("FFF", "010-1111-6666"),
-        ContactData("GGG", "010-1111-7777"),
-        ContactData("HHH", "010-1111-8888"),
-        ContactData("III", "010-1111-9999"),
-        ContactData("JJJ", "010-1111-0000"),
-        ContactData("KKK", "010-2222-2222"),
-        ContactData("LLL", "010-2222-3333"),
-        ContactData("MMM", "010-2222-4444"),
-        ContactData("NNN", "010-2222-5555"),
-        ContactData("OOO", "010-2222-6666"),
-        ContactData("PPP", "010-2222-7777"),
-        ContactData("QQQ", "010-2222-8888"),
-        ContactData("RRR", "010-2222-9999"),
-        ContactData("SSS", "010-2222-0000")
-    )
+    var dataList: ArrayList<ContactData> = ContactList
 
     private var _binding: FragmentContactBinding? = null
 
