@@ -21,7 +21,6 @@ class ContactListAdapter(private var list: MutableList<ContactData>): RecyclerVi
             tv_phoneNum.text = item.phoneNumber
 
             itemView.setOnClickListener {
-
                 Intent(context, ContactDetailActivity::class.java).apply {
                     putExtra("contactData", item)
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
