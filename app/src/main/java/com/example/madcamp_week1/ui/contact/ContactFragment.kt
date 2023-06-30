@@ -12,7 +12,7 @@ import com.example.madcamp_week1.db.ContactData
 import com.example.madcamp_week1.db.ContactList
 
 class ContactFragment : Fragment() {
-    var dataList: ArrayList<ContactData> = ContactList
+    private var dataList: ArrayList<ContactData> = ContactList
 
     private var _binding: FragmentContactBinding? = null
 
