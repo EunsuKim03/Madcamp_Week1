@@ -1,5 +1,8 @@
 package com.example.madcamp_week1.db
 
+import java.time.LocalDate
+import java.time.Month
+
 var ContactList : ArrayList<ContactData> = arrayListOf(
     ContactData("AAA", "010-1111-1111"),
     ContactData("BBB", "010-1111-2222"),
@@ -44,5 +47,23 @@ var RestaurantList : ArrayList<RestaurantData> = arrayListOf(
     RestaurantData("핵밥", "photo_haekbob", "042-867-9731", "대전 유성구 온천2동 101"),
     RestaurantData("한마음정육식당", "photo_han_ma_eum", "042-867-2292", "대전 유성구 어은동 115-1"),
     RestaurantData("정통집", "photo_jungtongjip", "042-823-9289", "대전 유성구 궁동 410-8"),
+)
+
+var ReservationList : ArrayList<ReservationData> = arrayListOf(
+    ReservationData(RestaurantList[0],  arrayListOf(ContactList[0], ContactList[2]), "2023/6/30"),
+    ReservationData(RestaurantList[3],  arrayListOf(ContactList[2], ContactList[9]), "2023/6/30"),
+    ReservationData(RestaurantList[5],  arrayListOf(ContactList[13]), "2023/7/15"),
+    ReservationData(RestaurantList[2],  arrayListOf(ContactList[5], ContactList[3], ContactList[17]), "2023/8/14"),
+    ReservationData(RestaurantList[9],  arrayListOf(ContactList[8], ContactList[6], ContactList[14]), "2023/7/2"),
+    ReservationData(RestaurantList[11], arrayListOf(ContactList[1]), "2023/7/12"),
+    ReservationData(RestaurantList[13], arrayListOf(ContactList[10]), "2023/7/12"),
+    ReservationData(RestaurantList[10], arrayListOf(ContactList[4]), "2023/7/5"),
+    ReservationData(RestaurantList[19], arrayListOf(ContactList[6]), "2023/7/5"),
+    ReservationData(RestaurantList[7],  arrayListOf(ContactList[1], ContactList[2], ContactList[3], ContactList[4], ContactList[5]), "2023/7/20"),
+    ReservationData(RestaurantList[6],  arrayListOf(ContactList[12]), "2023/7/25"),
+    ReservationData(RestaurantList[18], arrayListOf(ContactList[15]), "2023/8/1"),
+    ReservationData(RestaurantList[20], arrayListOf(ContactList[18]), "2023/8/11"),
+    ReservationData(RestaurantList[4],  arrayListOf(ContactList[7], ContactList[11]), "2023/7/21"),
+    ReservationData(RestaurantList[1],  arrayListOf(ContactList[16]), "2023/7/23")
 )
 
