@@ -12,7 +12,7 @@
         android:title="@string/title_gallery" />
 
     <item
-        android:id="@+id/navi_likes"
+        android:id="@+id/navi_reservation"
         android:icon="@drawable/ic_navi_reservation"
         android:title="@string/title_reservation" />
 
