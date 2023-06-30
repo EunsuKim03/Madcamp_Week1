@@ -67,3 +67,4 @@ var ReservationList : ArrayList<ReservationData> = arrayListOf(
     ReservationData(RestaurantList[1],  arrayListOf(ContactList[16]), "2023/7/23")
 )
 
+

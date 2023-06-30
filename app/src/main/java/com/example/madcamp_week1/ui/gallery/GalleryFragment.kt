@@ -1,5 +1,6 @@
 package com.example.madcamp_week1.ui.gallery
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.madcamp_week1.databinding.FragmentGalleryBinding
+import com.example.madcamp_week1.db.RestaurantList
 
 
 class GalleryFragment : Fragment() {
@@ -18,17 +20,10 @@ class GalleryFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    var photolist = arrayListOf<Photo3>(
-        Photo3("ic_gallery_food", "ic_gallery_food", "eat_my_thai"),
-        Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
-        Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
-        Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
-        Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
-        Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
-        Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
-        Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
-        Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
-    )
+    val list1 = RestaurantList.map { it.photoName }.filterIndexed { i, _ -> i%3 == 0 }
+    val list2 = RestaurantList.map { it.photoName }.filterIndexed { i, _ -> i%3 == 1 }
+    val list3 = RestaurantList.map { it.photoName }.filterIndexed { i, _ -> i%3 == 2 }
+    val photolist = list1.zip(list2).zip(list3) { (s1, s2), s3 -> Photo3(s1, s2, s3) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,7 +40,7 @@ class GalleryFragment : Fragment() {
         binding.galleryList.layoutManager = lm
         binding.galleryList.setHasFixedSize(true)
 
-        val adt = GalleryListAdapter(requireContext(), photolist)
+        val adt = GalleryListAdapter(requireContext(), photolist as ArrayList<Photo3>)
         binding.galleryList.adapter = adt
 
         return root
