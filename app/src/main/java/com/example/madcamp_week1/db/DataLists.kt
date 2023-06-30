@@ -32,5 +32,17 @@ var RestaurantList : ArrayList<RestaurantData> = arrayListOf(
     RestaurantData("하레", "photo_hare", "070-8126-4139", "대전 유성구 어은로48번길 12 2층"),
     RestaurantData("어은스시", "photo_eounsushi", "042-863-5306", "대전 유성구 어은로48번길 9-11"),
     RestaurantData("연취", "photo_yeonchui", "042-825-6239", "대전 유성구 대학로163번길 31 1층"),
-    RestaurantData("초원돌구이", "photo_chowon", "0507-1490-3395", "대전 유성구 대학로145번길 21")
+    RestaurantData("초원돌구이", "photo_chowon", "0507-1490-3395", "대전 유성구 대학로145번길 21"),
+    RestaurantData("궁칼국수", "photo_gungkal", "042-861-1551", "대전 유성구 110-1 2층"),
+    RestaurantData("경성양꼬치", "photo_kyeongsung", "042-825-1999", "대전 유성구 궁동 406-18"),
+    RestaurantData("오모이데", "photo_omoidae", "042-824-9046", "대전 유성구 대학로163번길 407-8"),
+    RestaurantData("내가찜한닭", "photo_naejjimdak", "042-823-1238", "대전 유성구 궁동 410-6"),
+    RestaurantData("청년다방", "photo_chungnyeon", "042-824-2338", "대전 유성구 궁동 399-8"),
+    RestaurantData("대학생치킨", "photo_daehaksaeng", "042-825-9993", "대전 유성구 어은로52번길 15 1F"),
+    RestaurantData("폼프리츠", "photo_fompriz", "042-862-3678", "대전 유성구 어은동 112-9"),
+    RestaurantData("오늘은파스타", "photo_today_pasta", "042-826-0198", "대전 유성구 궁동 412-14"),
+    RestaurantData("핵밥", "photo_haekbob", "042-867-9731", "대전 유성구 온천2동 101"),
+    RestaurantData("한마음정육식당", "photo_han_ma_eum", "042-867-2292", "대전 유성구 어은동 115-1"),
+    RestaurantData("정통집", "photo_jungtongjip", "042-823-9289", "대전 유성구 궁동 410-8"),
 )
+

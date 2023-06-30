@@ -50,6 +50,10 @@ class GalleryListAdapter(private val context: android.content.Context, private v
             } else {
                 p3.setImageResource(R.mipmap.ic_launcher)
             }
+
+//            p1.setOnClickListener {
+//
+//            }
         }
     }
 }
