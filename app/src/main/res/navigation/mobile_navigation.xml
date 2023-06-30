@@ -18,8 +18,8 @@
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/navi_likes"
-        android:name="com.example.madcamp_week1.ui.likes.LikesFragment"
-        android:label="@string/title_likes"
-        tools:layout="@layout/fragment_likes" />
+        android:id="@+id/navi_reservation"
+        android:name="com.example.madcamp_week1.ui.reservation.ReservationFragment"
+        android:label="@string/title_reservation"
+        tools:layout="@layout/fragment_reservation" />
 </navigation>

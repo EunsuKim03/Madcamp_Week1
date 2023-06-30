@@ -25,7 +25,9 @@ class GalleryFragment : Fragment() {
         Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
         Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
         Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
-
+        Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
+        Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
+        Photo3("ic_gallery_food", "ic_gallery_food", "ic_gallery_food"),
     )
 
     override fun onCreateView(
