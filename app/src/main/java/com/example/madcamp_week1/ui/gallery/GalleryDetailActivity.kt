@@ -17,22 +17,19 @@ class GalleryDetailActivity : AppCompatActivity(){
         binding = ActivityGalleryDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val resId = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        val resId = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.getIntExtra("galleryData1", 0)
         } else {
             null
         }
 
-        val position = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        val position = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.getIntExtra("galleryData2", 0)
         } else {
             null
         }
 
-//        val photoName = RestaurantList[position!!].photoName
-        println("\n\n\n\n\n\n $resId \n\n\n\n\n\n")
         binding.galleryDetailPhoto.setImageResource(resId!!)
-//        println("\n\n\n\n\n\n $resId \n\n\n\n\n\n")
         binding.galleryDetailAddress.text = RestaurantList[position!!].address
         binding.galleryDetailName.text = RestaurantList[position!!].name
         binding.galleryDetailPhone.text = RestaurantList[position!!].resPhone
