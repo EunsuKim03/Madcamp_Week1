@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.db.ContactData
+import com.example.madcamp_week1.ui.contact.ContactDetailActivity
 
 class ReservationFriendsListAdapter(private var list: MutableList<ContactData>): RecyclerView.Adapter<ReservationFriendsListAdapter.ListItemViewHolder>() {
     inner class ListItemViewHolder(itemView: View?): RecyclerView.ViewHolder(itemView!!) {
@@ -19,6 +20,13 @@ class ReservationFriendsListAdapter(private var list: MutableList<ContactData>):
         fun bind(item: ContactData, position: Int) {
             tv_rsv_detail_friend_name.text = item.name
             tv_rsv_detail_friend_phone.text = item.phoneNumber
+
+            itemView.setOnClickListener {
+                Intent(context, ContactDetailActivity::class.java).apply {
+                    putExtra("contactData", item)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }.run { context.startActivity(this) }
+            }
         }
     }
 
