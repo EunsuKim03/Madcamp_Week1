@@ -34,5 +34,7 @@ class GalleryDetailActivity : AppCompatActivity(){
         binding.galleryDetailName.text = RestaurantList[position!!].name
         binding.galleryDetailPhone.text = RestaurantList[position!!].resPhone
 
+        supportActionBar?.setTitle(RestaurantList[position!!].name)
+
     }
 }

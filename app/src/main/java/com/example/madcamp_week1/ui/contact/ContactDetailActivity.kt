@@ -27,5 +27,7 @@ class ContactDetailActivity : AppCompatActivity() {
         binding.tvContactDetailName.text = data!!.name
         binding.tvContactDetailPhonenum.text = data!!.phoneNumber
 
+        supportActionBar?.setTitle(data!!.name)
+
     }
 }
