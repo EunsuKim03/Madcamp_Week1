@@ -1,5 +1,6 @@
 package com.example.madcamp_week1.ui.reservation
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +10,8 @@ import com.example.madcamp_week1.databinding.ActivityContactDetailBinding
 import com.example.madcamp_week1.databinding.ActivityReservationDetailBinding
 import com.example.madcamp_week1.db.ContactData
 import com.example.madcamp_week1.db.ReservationData
+import com.example.madcamp_week1.db.RestaurantList
+import com.example.madcamp_week1.ui.gallery.GalleryMapActivity
 
 class ReservationDetailActivity : AppCompatActivity() {
 
@@ -42,5 +45,15 @@ class ReservationDetailActivity : AppCompatActivity() {
         binding.rcvRsvDetailFriends.setHasFixedSize(true)
         binding.rcvRsvDetailFriends.adapter = ReservationFriendsListAdapter(list)
 
+        binding.tvRsvDetailRestaurantAddr.setOnClickListener {
+            Intent(
+                applicationContext,
+                GalleryMapActivity::class.java
+            ).apply{
+                putExtra("galleryMapAddr", data!!.restaurant.address)
+                putExtra("galleryMapName", data!!.restaurant.name)
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }.run { applicationContext.startActivity(this) }
+        }
     }
 }
