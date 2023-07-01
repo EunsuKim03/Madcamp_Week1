@@ -1,5 +1,6 @@
 package com.example.madcamp_week1.ui.reservation
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.db.ReservationData
+import com.example.madcamp_week1.ui.contact.ContactDetailActivity
 
 class ReservationListAdapter(private var list: MutableList<ReservationData>): RecyclerView.Adapter<ReservationListAdapter.ListItemViewHolder>() {
     inner class ListItemViewHolder(itemView: View?): RecyclerView.ViewHolder(itemView!!) {
@@ -63,6 +65,12 @@ class ReservationListAdapter(private var list: MutableList<ReservationData>): Re
             tv_restaurant_name.text = item.restaurant.name
 
             // click event listener for detailed reservation page here
+            itemView.setOnClickListener {
+                Intent(context, ReservationDetailActivity::class.java).apply {
+                    putExtra("reservationData", item)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }.run { context.startActivity(this) }
+            }
         }
     }
 
