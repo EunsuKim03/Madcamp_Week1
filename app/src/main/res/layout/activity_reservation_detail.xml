@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.reservation.ReservationDetailActivity">
+
+    <ScrollView
+        android:id="@+id/sv_rsv_detail_restaurant_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+        <!-- restaurant description section -->
+        <LinearLayout
+            android:id="@+id/ll_rsv_detail_restaurant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical"
+            >
+
+            <ImageView
+                android:id="@+id/iv_rsv_detail_restaurant_img"
+                android:layout_width="330dp"
+                android:layout_height="330dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:id="@+id/tv_rsv_detail_restaurant_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"/>
+            <TextView
+                android:id="@+id/tv_rsv_detail_restaurant_addr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:drawableStart="@drawable/ic_gallery_map"
+                android:drawablePadding="16dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp" />
+            <TextView
+                android:id="@+id/tv_rsv_detail_restaurant_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:drawableStart="@drawable/ic_contact_call"
+                android:drawablePadding="16dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="일행 연락처 목록"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
+                >
+                <!-- friends info section -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcv_rsv_detail_friends"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+
+                    />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

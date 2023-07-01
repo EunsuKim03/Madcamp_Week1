@@ -31,6 +31,8 @@ class ReservationFragment : Fragment() {
 
         _binding = FragmentReservationBinding.inflate(inflater, container, false)
 
+        dataList.sortWith(compareBy {it.date})
+
         binding.rcvReservationList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.rcvReservationList.setHasFixedSize(true)
         binding.rcvReservationList.adapter = ReservationListAdapter(dataList)
