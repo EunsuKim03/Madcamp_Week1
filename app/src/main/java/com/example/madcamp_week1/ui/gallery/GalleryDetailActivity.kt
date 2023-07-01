@@ -1,5 +1,6 @@
 package com.example.madcamp_week1.ui.gallery
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -35,6 +36,17 @@ class GalleryDetailActivity : AppCompatActivity(){
         binding.galleryDetailPhone.text = RestaurantList[position!!].resPhone
 
         supportActionBar?.setTitle(RestaurantList[position!!].name)
+
+        binding.galleryDetailAddress.setOnClickListener {
+            Intent(
+                applicationContext,
+                GalleryMapActivity::class.java
+            ).apply{
+                putExtra("galleryMapAddr", RestaurantList[position!!].address)
+                putExtra("galleryMapName", RestaurantList[position!!].name)
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }.run { applicationContext.startActivity(this) }
+        }
 
     }
 }
