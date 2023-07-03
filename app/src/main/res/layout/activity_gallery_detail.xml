@@ -67,7 +67,8 @@
             android:textColor="#000000"
             android:textAlignment="center"
             android:drawableStart="@drawable/ic_gallery_map"
-            android:drawablePadding="20dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             />
 
         <TextView
@@ -78,7 +79,8 @@
             android:textSize="20sp"
             android:textColor="#000000"
             android:drawableStart="@drawable/ic_contact_call"
-            android:drawablePadding="30dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             />
 
     </LinearLayout>

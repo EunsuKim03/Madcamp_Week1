@@ -61,56 +61,56 @@
   },
   {
     "id": 10,
-    "name": "KKK",
-    "photo_name": "",
+    "name": "김채원",
+    "photo_name": "person_chaewon",
     "phone": "010-2222-2222"
   },
   {
     "id": 11,
-    "name": "LLL",
-    "photo_name": "",
+    "name": "홍은채",
+    "photo_name": "person_eunchae",
     "phone": "010-2222-3333"
   },
   {
     "id": 12,
-    "name": "MMM",
-    "photo_name": "",
+    "name": "카즈하",
+    "photo_name": "person_kazuha",
     "phone": "010-2222-4444"
   },
   {
     "id": 13,
-    "name": "NNN",
-    "photo_name": "",
+    "name": "사쿠라",
+    "photo_name": "person_sakura",
     "phone": "010-2222-5555"
   },
   {
     "id": 14,
-    "name": "OOO",
-    "photo_name": "",
+    "name": "허윤진",
+    "photo_name": "person_yunjin",
     "phone": "010-2222-6666"
   },
   {
     "id": 15,
-    "name": "PPP",
-    "photo_name": "",
+    "name": "민지",
+    "photo_name": "person_minji",
     "phone": "010-2222-7777"
   },
   {
     "id": 16,
-    "name": "QQQ",
-    "photo_name": "",
+    "name": "하니",
+    "photo_name": "person_honey",
     "phone": "010-2222-8888"
   },
   {
     "id": 17,
-    "name": "RRR",
-    "photo_name": "",
+    "name": "이지은",
+    "photo_name": "person_iu",
     "phone": "010-2222-9999"
   },
   {
     "id": 18,
-    "name": "SSS",
-    "photo_name": "",
+    "name": "장원영",
+    "photo_name": "person_wonyoung",
     "phone": "010-2222-0000"
   }
 ]
