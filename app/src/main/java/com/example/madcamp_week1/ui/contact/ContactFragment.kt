@@ -34,8 +34,9 @@ class ContactFragment : Fragment() {
             val jsonObject = jsonArray.getJSONObject(index)
             val id = jsonObject.getInt("id")
             val name = jsonObject.getString("name")
+            val photoName = jsonObject.getString("photo_name")
             val phoneNumber = jsonObject.getString("phone")
-            contactDataList.add(ContactData(id, name, phoneNumber))
+            contactDataList.add(ContactData(id, name, photoName, phoneNumber))
         }
 
         val homeViewModel =

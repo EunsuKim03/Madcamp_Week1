@@ -27,6 +27,11 @@ class ContactDetailActivity : AppCompatActivity() {
 
         binding.tvContactDetailName.text = data!!.name
         binding.tvContactDetailPhonenum.text = data!!.phoneNumber
+        if(data!!.photoName == "") {
+            binding.ivContactDetailProfile.setImageResource(this.resources.getIdentifier("ic_contact_profile", "drawable", this.packageName))
+        } else {
+            binding.ivContactDetailProfile.setImageResource(this.resources.getIdentifier(data!!.photoName, "drawable", this.packageName))
+        }
 
 
         // Toolbar
