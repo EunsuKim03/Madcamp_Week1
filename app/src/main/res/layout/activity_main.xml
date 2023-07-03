@@ -31,16 +31,17 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/cl_toolbar_container_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
         tools:context=".MainActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_main_activity"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:background="@color/purple_200"
+            android:background="@color/toolbar_color"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,14 +51,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_toolbar_main"
-                android:layout_gravity="center"
+                android:text = "@string/text_toolbar_main"
                 android:id="@+id/toolbar_main_activity_title"
+                android:textStyle="bold"
+                android:textColor="@color/black"
                 android:textSize="20sp"/>
 
         </androidx.appcompat.widget.Toolbar>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

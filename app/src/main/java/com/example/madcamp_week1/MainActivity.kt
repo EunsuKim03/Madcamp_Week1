@@ -37,6 +37,11 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
+                    binding.toolbarMainActivityTitle.text = when(position) {
+                        0 ->  "Contact"
+                        1 ->  "Gallery"
+                        else -> "Reservation"
+                    }
                     binding.navView.menu.getItem(position).isChecked = true
                 }
             }
@@ -45,14 +50,17 @@ class MainActivity : AppCompatActivity() {
         binding.navView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.navi_contact -> {
+                    binding.toolbarMainActivityTitle.text = "Contact"
                     binding.pager.currentItem = 0
                     return@setOnItemSelectedListener true
                 }
                 R.id.navi_gallery -> {
+                    binding.toolbarMainActivityTitle.text = "Gallery"
                     binding.pager.currentItem = 1
                     return@setOnItemSelectedListener true
                 }
                 R.id.navi_reservation -> {
+                    binding.toolbarMainActivityTitle.text = "Reservation"
                     binding.pager.currentItem = 2
                     return@setOnItemSelectedListener true
                 }
