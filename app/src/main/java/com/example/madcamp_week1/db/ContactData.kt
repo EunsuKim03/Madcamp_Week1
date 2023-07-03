@@ -22,4 +22,4 @@ import kotlinx.parcelize.Parcelize
 //}
 
 @Parcelize
-data class ContactData(val name: String, val phoneNumber: String) : Parcelable
+data class ContactData(val cid: Int, val name: String, val phoneNumber: String) : Parcelable

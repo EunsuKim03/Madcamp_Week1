@@ -9,12 +9,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.madcamp_week1.databinding.FragmentReservationBinding
+import com.example.madcamp_week1.db.ContactData
 import com.example.madcamp_week1.db.ReservationData
-import com.example.madcamp_week1.db.ReservationList
+import com.example.madcamp_week1.ui.contact.contactDataList
+import com.example.madcamp_week1.ui.gallery.restaurantDataList
+import org.json.JSONArray
 
+var reservationDataList = ArrayList<ReservationData>()
 class ReservationFragment : Fragment() {
-    private var dataList: ArrayList<ReservationData> = ReservationList
-
+//    private var dataList: ArrayList<ReservationData> = ReservationList
     private var _binding: FragmentReservationBinding? = null
 
     // This property is only valid between onCreateView and
@@ -26,16 +29,34 @@ class ReservationFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // parse json file
+        val json = resources.assets.open("reservation_data.json").reader().readText()
+        val jsonArray = JSONArray(json)
+        for (index in 0 until jsonArray.length()) {
+            val jsonObject = jsonArray.getJSONObject(index)
+            val id = jsonObject.getInt("id")
+            val rid = jsonObject.getInt("restaurant_id")
+            val contactID_jsonArray = jsonObject.getJSONArray("contact_id")
+            var contacts = ArrayList<ContactData>()
+            for(idx in 0 until contactID_jsonArray.length()) {
+                val cid = contactID_jsonArray.getInt(idx)
+                contacts.add(contactDataList.get(cid))
+            }
+
+            val date = jsonObject.getString("date")
+            reservationDataList.add(ReservationData(restaurantDataList.get(rid), contacts, date))
+        }
+
         val reservationViewModel =
             ViewModelProvider(this)
 
         _binding = FragmentReservationBinding.inflate(inflater, container, false)
 
-        dataList.sortWith(compareBy {it.date})
+        reservationDataList.sortWith(compareBy {it.date})
 
         var dataListByDate = ArrayList<Pair<String, List<ReservationData>>>()
 
-        dataList.groupBy { it.date }.entries.map { dataListByDate.add(Pair(it.key, it.value)) }.toList()
+        reservationDataList.groupBy { it.date }.entries.map { dataListByDate.add(Pair(it.key, it.value)) }.toList()
 
 
         binding.rcvReservationList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

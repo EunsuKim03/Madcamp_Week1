@@ -9,9 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.madcamp_week1.databinding.FragmentGalleryBinding
-import com.example.madcamp_week1.db.RestaurantList
+import com.example.madcamp_week1.db.RestaurantData
+import org.json.JSONArray
 
 
+var restaurantDataList = ArrayList<RestaurantData>()
 class GalleryFragment : Fragment() {
 
     private var _binding: FragmentGalleryBinding? = null
@@ -20,16 +22,31 @@ class GalleryFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    val list1 = RestaurantList.map { it.photoName }.filterIndexed { i, _ -> i%3 == 0 }
-    val list2 = RestaurantList.map { it.photoName }.filterIndexed { i, _ -> i%3 == 1 }
-    val list3 = RestaurantList.map { it.photoName }.filterIndexed { i, _ -> i%3 == 2 }
-    val photolist = list1.zip(list2).zip(list3) { (s1, s2), s3 -> Photo3(s1, s2, s3) }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val json = resources.assets.open("restaurant_data.json").reader().readText()
+        val jsonArray = JSONArray(json)
+        for (index in 0 until jsonArray.length()) {
+            val jsonObject = jsonArray.getJSONObject(index)
+            val rid = jsonObject.getInt("id")
+            val name = jsonObject.getString("name")
+            val photo_name = jsonObject.getString("photo_name")
+            val phoneNumber = jsonObject.getString("phone_number")
+            val address = jsonObject.getString("address")
+
+            restaurantDataList.add(RestaurantData(rid, name, photo_name, phoneNumber, address))
+        }
+
+        val list1 = restaurantDataList.map { it.photoName }.filterIndexed { i, _ -> i%3 == 0 }
+        val list2 = restaurantDataList.map { it.photoName }.filterIndexed { i, _ -> i%3 == 1 }
+        val list3 = restaurantDataList.map { it.photoName }.filterIndexed { i, _ -> i%3 == 2 }
+        val photolist = list1.zip(list2).zip(list3) { (s1, s2), s3 -> Photo3(s1, s2, s3) }
+
         val galleryViewModel =
             ViewModelProvider(this)
 

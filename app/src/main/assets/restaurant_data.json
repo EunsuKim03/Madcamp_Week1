@@ -1,0 +1,149 @@
+[
+  {
+    "id": 0,
+    "name": "잇마이타이",
+    "photo_name": "photo_eatmythai",
+    "phone_number": "042-335-5466",
+    "address": "대전 유성구 어은로58번길 62 1층 잇마이타이"
+  },
+  {
+    "id": 1,
+    "name": "훌랄라참숯바베큐치킨",
+    "photo_name": "photo_hoolala",
+    "phone_number": "042-863-5577",
+    "address": "대전 유성구 어은로48번길 9-9"
+  },
+  {
+    "id": 2,
+    "name": "맑음",
+    "photo_name": "photo_malgm",
+    "phone_number": "042-861-0244",
+    "address": "대전 유성구 어은로42번길 27"
+  },
+  {
+    "id": 3,
+    "name": "처갓집양념치킨",
+    "photo_name": "photo_cheogajip",
+    "phone_number": "042-861-9255",
+    "address": "대전 유성구 어은로48번길 9-5"
+  },
+  {
+    "id": 4,
+    "name": "엉클부대찌개",
+    "photo_name": "photo_uncleboodae",
+    "phone_number": "042-867-0102",
+    "address": "대전 유성구 어은로48번길 26"
+  },
+  {
+    "id": 5,
+    "name": "아소부",
+    "photo_name": "photo_asobu",
+    "phone_number": "042-825-2995",
+    "address": "대전 유성구 어은로48번길 14"
+  },
+  {
+    "id": 6,
+    "name": "하레",
+    "photo_name": "photo_hare",
+    "phone_number": "070-8126-4139",
+    "address": "대전 유성구 어은로48번길 12 2층"
+  },
+  {
+    "id": 7,
+    "name": "어은스시",
+    "photo_name": "photo_eounsushi",
+    "phone_number": "042-863-5306",
+    "address": "대전 유성구 어은로48번길 9-11"
+  },
+  {
+    "id": 8,
+    "name": "연취",
+    "photo_name": "photo_yeonchui",
+    "phone_number": "042-825-6239",
+    "address": "대전 유성구 대학로163번길 31 1층"
+  },
+  {
+    "id": 9,
+    "name": "초원돌구이",
+    "photo_name": "photo_chowon",
+    "phone_number": "0507-1490-3395",
+    "address": "대전 유성구 대학로145번길 21"
+  },
+  {
+    "id": 10,
+    "name": "궁칼국수",
+    "photo_name": "photo_gungkal",
+    "phone_number": "042-861-1551",
+    "address": "대전 유성구 어은로58번길 9-13 2층"
+  },
+  {
+    "id": 11,
+    "name": "경성양꼬치",
+    "photo_name": "photo_kyeongsung",
+    "phone_number": "042-825-1999",
+    "address": "대전 유성구 궁동 406-18"
+  },
+  {
+    "id": 12,
+    "name": "오모이데",
+    "photo_name": "photo_omoidae",
+    "phone_number": "042-824-9046",
+    "address": "대전 유성구 대학로163번길 407-8"
+  },
+  {
+    "id": 13,
+    "name": "내가찜한닭",
+    "photo_name": "photo_naejjimdak",
+    "phone_number": "042-823-1238",
+    "address": "대전 유성구 궁동 410-6"
+  },
+  {
+    "id": 14,
+    "name": "청년다방",
+    "photo_name": "photo_chungnyeon",
+    "phone_number": "042-824-2338",
+    "address": "대전 유성구 궁동 399-8"
+  },
+  {
+    "id": 15,
+    "name": "대학생치킨",
+    "photo_name": "photo_daehaksaeng",
+    "phone_number": "042-825-9993",
+    "address": "대전 유성구 어은로52번길 15 1F"
+  },
+  {
+    "id": 16,
+    "name": "폼프리츠",
+    "photo_name": "photo_fompriz",
+    "phone_number": "042-862-3678",
+    "address": "대전 유성구 어은동 112-9"
+  },
+  {
+    "id": 17,
+    "name": "오늘은파스타",
+    "photo_name": "photo_today_pasta",
+    "phone_number": "042-826-0198",
+    "address": "대전 유성구 궁동 412-14"
+  },
+  {
+    "id": 18,
+    "name": "핵밥",
+    "photo_name": "photo_haekbob",
+    "phone_number": "042-867-9731",
+    "address": "대전 유성구 어은로57번길 41 채움빌 101호"
+  },
+  {
+    "id": 19,
+    "name": "한마음정육식당",
+    "photo_name": "photo_han_ma_eum",
+    "phone_number": "042-867-2292",
+    "address": "대전 유성구 어은동 115-1"
+  },
+  {
+    "id": 20,
+    "name": "정통집",
+    "photo_name": "photo_jungtongjip",
+    "phone_number": "042-823-9289",
+    "address": "대전 유성구 궁동 410-8"
+  }
+]
