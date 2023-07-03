@@ -33,9 +33,15 @@ class ReservationFragment : Fragment() {
 
         dataList.sortWith(compareBy {it.date})
 
+        var dataListByDate = ArrayList<Pair<String, List<ReservationData>>>()
+
+        dataList.groupBy { it.date }.entries.map { dataListByDate.add(Pair(it.key, it.value)) }.toList()
+
+
         binding.rcvReservationList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.rcvReservationList.setHasFixedSize(true)
-        binding.rcvReservationList.adapter = ReservationListAdapter(dataList)
+//        binding.rcvReservationList.adapter = ReservationListAdapter(dataList)
+        binding.rcvReservationList.adapter = ReservationCardListAdapter(dataListByDate)
 
         val root: View = binding.root
 
