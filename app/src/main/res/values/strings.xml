@@ -3,4 +3,6 @@
     <string name="title_contact">Contact</string>
     <string name="title_gallery">Gallery</string>
     <string name="title_reservation">Reservation</string>
+    <string name="text_toolbar_main">제목제목</string>
+    <string name="toolbar_main_button">버튼버튼</string>
 </resources>

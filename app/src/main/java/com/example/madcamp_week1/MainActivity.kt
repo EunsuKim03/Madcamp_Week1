@@ -1,9 +1,11 @@
 package com.example.madcamp_week1
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -22,7 +24,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // ToolBar
+        val toolbar = findViewById<Toolbar>(R.id.toolbar_main_activity)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
+        // ViewPager2
         binding.pager.adapter = ViewPagerAdapter(this)
 
         binding.pager.registerOnPageChangeCallback(
@@ -56,18 +63,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-//        val navView: BottomNavigationView = binding.navView
-//
-//        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-//        // Passing each menu ID as a set of Ids because each
-//        // menu should be considered as top level destinations.
-//        val appBarConfiguration = AppBarConfiguration(
-//            setOf(
-//                R.id.navi_contact, R.id.navi_gallery, R.id.navi_reservation
-//            )
-//        )
-//        setupActionBarWithNavController(navController, appBarConfiguration)
-//        navView.setupWithNavController(navController)
     }
 
 

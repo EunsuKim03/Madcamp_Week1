@@ -3,6 +3,7 @@ package com.example.madcamp_week1.ui.gallery
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.databinding.ActivityGalleryDetailBinding
@@ -35,6 +36,10 @@ class GalleryDetailActivity : AppCompatActivity(){
         binding.galleryDetailName.text = RestaurantList[position!!].name
         binding.galleryDetailPhone.text = RestaurantList[position!!].resPhone
 
+        // Toolbar
+        val toolbar = binding.toolbarGallery
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setTitle(RestaurantList[position!!].name)
 
         binding.galleryDetailAddress.setOnClickListener {
@@ -48,5 +53,16 @@ class GalleryDetailActivity : AppCompatActivity(){
             }.run { applicationContext.startActivity(this) }
         }
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        when (id) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
