@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week1.R
@@ -16,11 +17,17 @@ class ReservationFriendsListAdapter(private var list: MutableList<ContactData>):
 
         var tv_rsv_detail_friend_name: TextView = itemView!!.findViewById(R.id.tv_rsv_detail_friend_name)
         var tv_rsv_detail_friend_phone: TextView = itemView!!.findViewById(R.id.tv_rsv_detail_friend_phone)
+        var iv_rsv_detail_friend_img: ImageView = itemView!!.findViewById(R.id.iv_rsv_detail_friend_img)
 
         fun bind(item: ContactData, position: Int) {
             tv_rsv_detail_friend_name.text = item.name
             tv_rsv_detail_friend_phone.text = item.phoneNumber
 
+            if(item.photoName == "") {
+                iv_rsv_detail_friend_img.setImageResource(context.resources.getIdentifier("ic_contact_profile", "drawable", context.packageName))
+            } else {
+                iv_rsv_detail_friend_img.setImageResource(context.resources.getIdentifier(item.photoName, "drawable", context.packageName))
+            }
             itemView.setOnClickListener {
                 Intent(context, ContactDetailActivity::class.java).apply {
                     putExtra("contactData", item)

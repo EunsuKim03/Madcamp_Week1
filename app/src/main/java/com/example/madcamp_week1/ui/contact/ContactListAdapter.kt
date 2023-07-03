@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week1.R
@@ -15,10 +16,18 @@ class ContactListAdapter(private var list: MutableList<ContactData>): RecyclerVi
 
         var tv_name: TextView = itemView!!.findViewById(R.id.tv_contactName)
         var tv_phoneNum: TextView = itemView!!.findViewById(R.id.tv_contactPhone)
+        var iv_contactProfile: ImageView = itemView!!.findViewById(R.id.iv_contactProfile)
 
         fun bind(item: ContactData, position: Int) {
             tv_name.text = item.name
             tv_phoneNum.text = item.phoneNumber
+            // if in drawable
+            if(item.photoName == "") {
+                iv_contactProfile.setImageResource(context.resources.getIdentifier("ic_contact_profile", "drawable", context.packageName))
+            } else {
+                iv_contactProfile.setImageResource(context.resources.getIdentifier(item.photoName, "drawable", context.packageName))
+            }
+
 
             itemView.setOnClickListener {
                 Intent(context, ContactDetailActivity::class.java).apply {
