@@ -42,10 +42,12 @@ class GalleryFragment : Fragment() {
             restaurantDataList.add(RestaurantData(rid, name, photo_name, phoneNumber, address))
         }
 
-        val list1 = restaurantDataList.map { it.photoName }.filterIndexed { i, _ -> i%3 == 0 }
-        val list2 = restaurantDataList.map { it.photoName }.filterIndexed { i, _ -> i%3 == 1 }
-        val list3 = restaurantDataList.map { it.photoName }.filterIndexed { i, _ -> i%3 == 2 }
+        val _list = (1..(3 - (restaurantDataList.size % 3))%3).fold(restaurantDataList.map{r -> r as RestaurantData?}.toMutableList(), {acc, _ -> acc.add(null); acc})
+        val list1 = _list.map { it?.photoName }.filterIndexed { i, _ -> i%3 == 0 }
+        val list2 = _list.map { it?.photoName }.filterIndexed { i, _ -> i%3 == 1 }
+        val list3 = _list.map { it?.photoName }.filterIndexed { i, _ -> i%3 == 2 }
         val photolist = list1.zip(list2).zip(list3) { (s1, s2), s3 -> Photo3(s1, s2, s3) }
+        println("\n\n\n${_list.size}\n\n\n")
 
         val galleryViewModel =
             ViewModelProvider(this)
