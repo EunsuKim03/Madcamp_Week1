@@ -42,6 +42,7 @@
             android:id="@+id/gallery_detail_photo"
             android:layout_width="330dp"
             android:layout_height="330dp"
+            android:layout_gravity="center"
             android:src="@drawable/ic_gallery_food"
             android:layout_marginBottom="30dp"
             />
@@ -64,6 +65,7 @@
             android:layout_gravity="center"
             android:textSize="20sp"
             android:textColor="#000000"
+            android:textAlignment="center"
             android:drawableStart="@drawable/ic_gallery_map"
             android:drawablePadding="20dp"
             />

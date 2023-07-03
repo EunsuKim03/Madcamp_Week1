@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toStartOf="@+id/photo2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        android:visibility="invisible"/>
 
     <ImageView
         android:id="@+id/photo2"
@@ -30,7 +30,7 @@
         app:layout_constraintStart_toEndOf="@+id/photo1"
         app:layout_constraintEnd_toStartOf="@+id/photo3"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        android:visibility="invisible"/>
 
     <ImageView
         android:id="@+id/photo3"
@@ -43,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/photo2"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        android:visibility="invisible"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
