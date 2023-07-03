@@ -9,10 +9,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.madcamp_week1.databinding.FragmentContactBinding
 import com.example.madcamp_week1.db.ContactData
-import com.example.madcamp_week1.db.ContactList
+import org.json.JSONArray
 
+var contactDataList = ArrayList<ContactData>()
 class ContactFragment : Fragment() {
-    private var dataList: ArrayList<ContactData> = ContactList
+//    private var dataList: ArrayList<ContactData> = ContactList
+
 
     private var _binding: FragmentContactBinding? = null
 
@@ -25,6 +27,17 @@ class ContactFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // parse json file
+        val json = resources.assets.open("contact_data.json").reader().readText()
+        val jsonArray = JSONArray(json)
+        for (index in 0 until jsonArray.length()) {
+            val jsonObject = jsonArray.getJSONObject(index)
+            val id = jsonObject.getInt("id")
+            val name = jsonObject.getString("name")
+            val phoneNumber = jsonObject.getString("phone")
+            contactDataList.add(ContactData(id, name, phoneNumber))
+        }
+
         val homeViewModel =
             ViewModelProvider(this)
 
@@ -32,7 +45,7 @@ class ContactFragment : Fragment() {
 
         binding.rcvContactList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.rcvContactList.setHasFixedSize(true)
-        binding.rcvContactList.adapter = ContactListAdapter(dataList)
+        binding.rcvContactList.adapter = ContactListAdapter(contactDataList)
 
         val root: View = binding.root
 //

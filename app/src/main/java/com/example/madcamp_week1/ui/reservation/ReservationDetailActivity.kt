@@ -10,7 +10,6 @@ import com.example.madcamp_week1.databinding.ActivityContactDetailBinding
 import com.example.madcamp_week1.databinding.ActivityReservationDetailBinding
 import com.example.madcamp_week1.db.ContactData
 import com.example.madcamp_week1.db.ReservationData
-import com.example.madcamp_week1.db.RestaurantList
 import com.example.madcamp_week1.ui.gallery.GalleryMapActivity
 
 class ReservationDetailActivity : AppCompatActivity() {

@@ -7,7 +7,6 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.databinding.ActivityGalleryDetailBinding
-import com.example.madcamp_week1.db.RestaurantList
 
 class GalleryDetailActivity : AppCompatActivity(){
     private lateinit var binding : ActivityGalleryDetailBinding
@@ -32,23 +31,23 @@ class GalleryDetailActivity : AppCompatActivity(){
         }
 
         binding.galleryDetailPhoto.setImageResource(resId!!)
-        binding.galleryDetailAddress.text = RestaurantList[position!!].address
-        binding.galleryDetailName.text = RestaurantList[position!!].name
-        binding.galleryDetailPhone.text = RestaurantList[position!!].resPhone
+        binding.galleryDetailAddress.text = restaurantDataList[position!!].address
+        binding.galleryDetailName.text = restaurantDataList[position!!].name
+        binding.galleryDetailPhone.text = restaurantDataList[position!!].resPhone
 
         // Toolbar
         val toolbar = binding.toolbarGallery
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setTitle(RestaurantList[position!!].name)
+        supportActionBar?.setTitle(restaurantDataList[position!!].name)
 
         binding.galleryDetailAddress.setOnClickListener {
             Intent(
                 applicationContext,
                 GalleryMapActivity::class.java
             ).apply{
-                putExtra("galleryMapAddr", RestaurantList[position!!].address)
-                putExtra("galleryMapName", RestaurantList[position!!].name)
+                putExtra("galleryMapAddr", restaurantDataList[position!!].address)
+                putExtra("galleryMapName", restaurantDataList[position!!].name)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }.run { applicationContext.startActivity(this) }
         }
