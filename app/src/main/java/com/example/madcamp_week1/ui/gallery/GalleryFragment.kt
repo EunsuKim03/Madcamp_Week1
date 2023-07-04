@@ -85,6 +85,49 @@ class GalleryFragment : Fragment() {
         return root
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        var db = Room.databaseBuilder(
+            requireContext().applicationContext,
+            RestaurantDatabase::class.java, "restaurantDB"
+        ).build()
+
+        val temp: List<RestaurantEntity>
+
+        runBlocking {
+            temp = db.restaurantDao().getAll()
+        }
+
+        if(temp.size <= 0) {
+            binding.galleryList.visibility = View.GONE
+            binding.tvIsGalleryEmpty.visibility = View.VISIBLE
+        } else {
+            binding.tvIsGalleryEmpty.visibility = View.GONE
+            binding.galleryList.visibility = View.VISIBLE
+            val _list = (1..(3 - (temp.size % 3))%3).fold(temp.map{r -> r as RestaurantEntity?}.toMutableList(), {acc, _ -> acc.add(null); acc})
+
+//        val list1 = _list.map { it?.photoName }.filterIndexed { i, _ -> i%3 == 0 }
+//        val list2 = _list.map { it?.photoName }.filterIndexed { i, _ -> i%3 == 1 }
+//        val list3 = _list.map { it?.photoName }.filterIndexed { i, _ -> i%3 == 2 }
+            val list1 = _list.filterIndexed { i, _ -> i%3 == 0 }
+            val list2 = _list.filterIndexed { i, _ -> i%3 == 1 }
+            val list3 = _list.filterIndexed { i, _ -> i%3 == 2 }
+            val photolist = list1.zip(list2).zip(list3) { (s1, s2), s3 -> Photo3(s1, s2, s3) }
+
+
+            val lm = LinearLayoutManager(context)
+            binding.galleryList.layoutManager = lm
+            binding.galleryList.setHasFixedSize(true)
+
+            val adt = GalleryListAdapter(requireContext(), photolist as ArrayList<Photo3>)
+            binding.galleryList.adapter = adt
+        }
+
+
+
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

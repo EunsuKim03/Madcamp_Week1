@@ -66,6 +66,7 @@ class GalleryListAdapter(private val context: android.content.Context, private v
                 Intent(context, GalleryDetailActivity::class.java).apply {
 //                    putExtra("galleryData1", resId1)
 //                    putExtra("galleryData2", position * 3)
+                    putExtra("rtid", photo_set.p1!!.rtid)
                     putExtra("restaurantName", photo_set.p1!!.name)
                     putExtra("restaurantPhoto", photo_set.p1!!.photoName)
                     putExtra("restaurantPhone", photo_set.p1!!.phoneNumber)
@@ -78,6 +79,7 @@ class GalleryListAdapter(private val context: android.content.Context, private v
                 Intent(context, GalleryDetailActivity::class.java).apply {
 //                    putExtra("galleryData1", resId2)
 //                    putExtra("galleryData2", position * 3 + 1)
+                    putExtra("rtid", photo_set.p2!!.rtid)
                     putExtra("restaurantName", photo_set.p2!!.name)
                     putExtra("restaurantPhoto", photo_set.p2!!.photoName)
                     putExtra("restaurantPhone", photo_set.p2!!.phoneNumber)
@@ -90,6 +92,7 @@ class GalleryListAdapter(private val context: android.content.Context, private v
                 Intent(context, GalleryDetailActivity::class.java).apply {
 //                    putExtra("galleryData1", resId3)
 //                    putExtra("galleryData2", position * 3 + 2)
+                    putExtra("rtid", photo_set.p3!!.rtid)
                     putExtra("restaurantName", photo_set.p3!!.name)
                     putExtra("restaurantPhoto", photo_set.p3!!.photoName)
                     putExtra("restaurantPhone", photo_set.p3!!.phoneNumber)

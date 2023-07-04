@@ -31,25 +31,13 @@ class ReservationAddActivity : AppCompatActivity() {
         var restaurantVar: String = ""
         var peopleListVar: String = ""
 
-        var dateOn = false
-        var restaurantOn = false
-        var peopleOn = false
-
-
-
         // date 저장
         dateVar = date.year.toString()+"/"+(date.month+1).toString()+"/"+date.dayOfMonth.toString()
 
-        // Todo: restaurant, people 정보 리스트로 구현하기 -> 로컬 저장 방법 알아야 할 수 있을 듯
-        //
 
-        // Done 버튼 처리  ->  logic 나중에 바꿀 것
-        if (dateOn && restaurantOn && peopleOn) {
-            done.setBackgroundColor(0x6D7EFD)
-            // Done button listener
-            done.setOnClickListener {
-                TODO()
-            }
+
+        done.setOnClickListener {
+            TODO()
         }
 
         // Cancel button listener
