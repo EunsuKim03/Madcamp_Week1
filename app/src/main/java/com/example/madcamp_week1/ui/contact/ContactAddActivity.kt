@@ -7,11 +7,16 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.room.Room
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.databinding.ActivityContactAddBinding
+import com.example.madcamp_week1.db.contactRoom.ContactDatabase
+import com.example.madcamp_week1.db.contactRoom.ContactEntity
+import kotlinx.coroutines.runBlocking
 
 
 class ContactAddActivity : AppCompatActivity() {
@@ -34,41 +39,51 @@ class ContactAddActivity : AppCompatActivity() {
         var nameVar: String = ""
         var phoneVar: String = ""
 
-        var nameOn = false
-        var phoneOn = false
+        var db = Room.databaseBuilder(
+            applicationContext,
+            ContactDatabase::class.java, "contactDB"
+        ).build()
 
         name.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                nameOn = false
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                nameVar = name.text.toString()
-                nameOn = true
+//                nameVar = name.text.toString()
             }
 
-            override fun afterTextChanged(p0: Editable?) {}
+            override fun afterTextChanged(p0: Editable?) {
+                nameVar = name.text.toString()
+                if ((nameVar != "") && (phoneVar != "")) {
+                    done.setBackgroundColor(Color.parseColor("#6D7EFD"))
+                }
+            }
 
         })
 
         phone.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                phoneOn = false
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                phoneVar = phone.text.toString()
-                phoneOn = true
+//                phoneVar = phone.text.toString()
 
-                // 여기서 done 처리 할까 그냥
-                done.setBackgroundColor(Color.parseColor("#6D7EFD"))
-                // Done button listener
-                done.setOnClickListener {
-//                TODO()
-                }
+//                // 여기서 done 처리 할까 그냥
+//                done.setBackgroundColor(Color.parseColor("#6D7EFD"))
+//                // Done button listener
+//                done.setOnClickListener {
+////                TODO()
+//                }
             }
 
-            override fun afterTextChanged(p0: Editable?) {}
+
+
+            override fun afterTextChanged(p0: Editable?) {
+                phoneVar = phone.text.toString()
+                if ((nameVar != "") && (phoneVar != "")) {
+                    done.setBackgroundColor(Color.parseColor("#6D7EFD"))
+                }
+            }
 
         })
 
@@ -79,13 +94,13 @@ class ContactAddActivity : AppCompatActivity() {
             activityResult.launch(intent)
         }
 
-        // 이름과 번호가 모두 입력 -> Done 버튼이 활성화 (이거 뭔가 이상함, 내가 원한 대로 작동 하는게 아닌 듯)
-        if (nameOn && phoneOn) {
-            done.setBackgroundColor(Color.parseColor("#6D7EFD"))
-            // Done button listener
-            done.setOnClickListener {
-//                TODO()
-            }
+
+
+
+
+        // Done button listener
+        done.setOnClickListener {
+           runBlocking { db.contactDao().insert(ContactEntity(nameVar, uri, phoneVar)) }
         }
 
         // Cancel button listener
