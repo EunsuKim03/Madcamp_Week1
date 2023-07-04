@@ -9,9 +9,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.db.ContactData
+import com.example.madcamp_week1.db.contactRoom.ContactEntity
 import com.example.madcamp_week1.ui.contact.ContactDetailActivity
 
-class ReservationFriendsListAdapter(private var list: MutableList<ContactData>): RecyclerView.Adapter<ReservationFriendsListAdapter.ListItemViewHolder>() {
+//class ReservationFriendsListAdapter(private var list: MutableList<ContactData>): RecyclerView.Adapter<ReservationFriendsListAdapter.ListItemViewHolder>() {
+class ReservationFriendsListAdapter(private var list: MutableList<ContactEntity>): RecyclerView.Adapter<ReservationFriendsListAdapter.ListItemViewHolder>() {
     inner class ListItemViewHolder(itemView: View?): RecyclerView.ViewHolder(itemView!!) {
         private val context = itemView!!.context
 
@@ -19,7 +21,7 @@ class ReservationFriendsListAdapter(private var list: MutableList<ContactData>):
         var tv_rsv_detail_friend_phone: TextView = itemView!!.findViewById(R.id.tv_rsv_detail_friend_phone)
         var iv_rsv_detail_friend_img: ImageView = itemView!!.findViewById(R.id.iv_rsv_detail_friend_img)
 
-        fun bind(item: ContactData, position: Int) {
+        fun bind(item: ContactEntity, position: Int) {
             tv_rsv_detail_friend_name.text = item.name
             tv_rsv_detail_friend_phone.text = item.phoneNumber
 
@@ -30,7 +32,10 @@ class ReservationFriendsListAdapter(private var list: MutableList<ContactData>):
             }
             itemView.setOnClickListener {
                 Intent(context, ContactDetailActivity::class.java).apply {
-                    putExtra("contactData", item)
+//                    putExtra("contactData", item)
+                    putExtra("name", item.name)
+                    putExtra("photoName", item.photoName)
+                    putExtra("phoneNumber", item.phoneNumber)
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }.run { context.startActivity(this) }
             }

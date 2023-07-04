@@ -8,12 +8,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.room.Room
 import com.example.madcamp_week1.databinding.FragmentGalleryBinding
 import com.example.madcamp_week1.db.RestaurantData
+import com.example.madcamp_week1.db.restaurantRoom.RestaurantDatabase
+import com.example.madcamp_week1.db.restaurantRoom.RestaurantEntity
+import kotlinx.coroutines.runBlocking
 import org.json.JSONArray
 
 
-var restaurantDataList = ArrayList<RestaurantData>()
+//var restaurantDataList = ArrayList<RestaurantData>()
 class GalleryFragment : Fragment() {
 
     private var _binding: FragmentGalleryBinding? = null
@@ -29,23 +33,39 @@ class GalleryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val json = resources.assets.open("restaurant_data.json").reader().readText()
-        val jsonArray = JSONArray(json)
-        for (index in 0 until jsonArray.length()) {
-            val jsonObject = jsonArray.getJSONObject(index)
-            val rid = jsonObject.getInt("id")
-            val name = jsonObject.getString("name")
-            val photo_name = jsonObject.getString("photo_name")
-            val phoneNumber = jsonObject.getString("phone_number")
-            val address = jsonObject.getString("address")
+        var db = Room.databaseBuilder(
+            requireContext().applicationContext,
+            RestaurantDatabase::class.java, "restaurantDB"
+        ).build()
 
-            restaurantDataList.add(RestaurantData(rid, name, photo_name, phoneNumber, address))
+//        val json = resources.assets.open("restaurant_data.json").reader().readText()
+//        val jsonArray = JSONArray(json)
+//        for (index in 0 until jsonArray.length()) {
+//            val jsonObject = jsonArray.getJSONObject(index)
+//            val rid = jsonObject.getInt("id")
+//            val name = jsonObject.getString("name")
+//            val photo_name = jsonObject.getString("photo_name")
+//            val phoneNumber = jsonObject.getString("phone_number")
+//            val address = jsonObject.getString("address")
+//
+//            restaurantDataList.add(RestaurantData(rid, name, photo_name, phoneNumber, address))
+//        }
+
+//        val _list = (1..(3 - (restaurantDataList.size % 3))%3).fold(restaurantDataList.map{r -> r as RestaurantData?}.toMutableList(), {acc, _ -> acc.add(null); acc})
+        val temp: List<RestaurantEntity>
+
+        runBlocking {
+            temp = db.restaurantDao().getAll()
         }
 
-        val _list = (1..(3 - (restaurantDataList.size % 3))%3).fold(restaurantDataList.map{r -> r as RestaurantData?}.toMutableList(), {acc, _ -> acc.add(null); acc})
-        val list1 = _list.map { it?.photoName }.filterIndexed { i, _ -> i%3 == 0 }
-        val list2 = _list.map { it?.photoName }.filterIndexed { i, _ -> i%3 == 1 }
-        val list3 = _list.map { it?.photoName }.filterIndexed { i, _ -> i%3 == 2 }
+        val _list = (1..(3 - (temp.size % 3))%3).fold(temp.map{r -> r as RestaurantEntity?}.toMutableList(), {acc, _ -> acc.add(null); acc})
+
+//        val list1 = _list.map { it?.photoName }.filterIndexed { i, _ -> i%3 == 0 }
+//        val list2 = _list.map { it?.photoName }.filterIndexed { i, _ -> i%3 == 1 }
+//        val list3 = _list.map { it?.photoName }.filterIndexed { i, _ -> i%3 == 2 }
+        val list1 = _list.filterIndexed { i, _ -> i%3 == 0 }
+        val list2 = _list.filterIndexed { i, _ -> i%3 == 1 }
+        val list3 = _list.filterIndexed { i, _ -> i%3 == 2 }
         val photolist = list1.zip(list2).zip(list3) { (s1, s2), s3 -> Photo3(s1, s2, s3) }
         println("\n\n\n${_list.size}\n\n\n")
 

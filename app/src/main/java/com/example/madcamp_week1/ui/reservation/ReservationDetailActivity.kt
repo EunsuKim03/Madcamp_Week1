@@ -13,13 +13,15 @@ import com.example.madcamp_week1.databinding.ActivityContactDetailBinding
 import com.example.madcamp_week1.databinding.ActivityReservationDetailBinding
 import com.example.madcamp_week1.db.ContactData
 import com.example.madcamp_week1.db.ReservationData
+import com.example.madcamp_week1.db.contactRoom.ContactEntity
 import com.example.madcamp_week1.ui.gallery.GalleryMapActivity
-import com.example.madcamp_week1.ui.gallery.restaurantDataList
+import com.google.gson.Gson
 
 class ReservationDetailActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityReservationDetailBinding
-    private lateinit var list: ArrayList<ContactData>
+//    private lateinit var list: ArrayList<ContactData>
+    private lateinit var list: ArrayList<ContactEntity>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reservation_detail)
@@ -27,26 +29,43 @@ class ReservationDetailActivity : AppCompatActivity() {
         binding = ActivityReservationDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val data = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra("reservationData", ReservationData::class.java)
-        } else {
-            intent.getParcelableExtra("reservationData") as? ReservationData
-        }
+//        val data = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//            intent.getParcelableExtra("reservationData", ReservationData::class.java)
+//        } else {
+//            intent.getParcelableExtra("reservationData") as? ReservationData
+//        }
 
-        var resDate = data!!.date
-        val arr = resDate.split("/")
+//        var resDate = data!!.date
+        var restaurantName = intent.getStringExtra("restaurantName")
+        var restaurantPhoto = intent.getStringExtra("restaurantPhoto")
+        var restaurantPhone = intent.getStringExtra("restaurantPhone")
+        var restaurantAddress = intent.getStringExtra("restaurantAddress")
+        var contactsJson = intent.getStringExtra("contacts")
+        var resDate = intent.getStringExtra("date")
+
+        var contacts = Gson().fromJson(contactsJson, Array<ContactEntity>::class.java)
+
+        val arr = resDate!!.split("/")
         val toolbar = binding.toolbarReservation
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setTitle("${arr[0].toInt()}년 ${arr[1].toInt()}월 ${arr[2].toInt()}일 예약")
 
-        binding.ivRsvDetailRestaurantImg.setImageResource(this.resources.getIdentifier(data!!.restaurant.photoName, "drawable", this.packageName))
-        binding.tvRsvDetailRestaurantName.text = data!!.restaurant.name
-        binding.tvRsvDetailRestaurantAddr.text = data!!.restaurant.address
-        binding.tvRsvDetailRestaurantPhone.text = data!!.restaurant.resPhone
+
+//        binding.ivRsvDetailRestaurantImg.setImageResource(this.resources.getIdentifier(data!!.restaurant.photoName, "drawable", this.packageName))
+//        binding.tvRsvDetailRestaurantName.text = data!!.restaurant.name
+//        binding.tvRsvDetailRestaurantAddr.text = data!!.restaurant.address
+//        binding.tvRsvDetailRestaurantPhone.text = data!!.restaurant.resPhone
+
+        binding.ivRsvDetailRestaurantImg.setImageResource(this.resources.getIdentifier(restaurantPhoto, "drawable", this.packageName))
+        binding.tvRsvDetailRestaurantName.text = restaurantName
+        binding.tvRsvDetailRestaurantAddr.text = restaurantAddress
+        binding.tvRsvDetailRestaurantPhone.text = restaurantPhone
 
         // rcv
-        list = data!!.contacts
+//        list = data!!.contacts
+        contacts.forEach { list.add(it) }
+
         binding.rcvRsvDetailFriends.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rcvRsvDetailFriends.setHasFixedSize(true)
         binding.rcvRsvDetailFriends.adapter = ReservationFriendsListAdapter(list)
@@ -56,8 +75,10 @@ class ReservationDetailActivity : AppCompatActivity() {
                 applicationContext,
                 GalleryMapActivity::class.java
             ).apply{
-                putExtra("galleryMapAddr", data!!.restaurant.address)
-                putExtra("galleryMapName", data!!.restaurant.name)
+//                putExtra("galleryMapAddr", data!!.restaurant.address)
+//                putExtra("galleryMapName", data!!.restaurant.name)
+                putExtra("galleryMapAddr", restaurantAddress)
+                putExtra("galleryMapName", restaurantName)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }.run { applicationContext.startActivity(this) }
         }

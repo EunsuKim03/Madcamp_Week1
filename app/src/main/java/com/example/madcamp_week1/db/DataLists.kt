@@ -1,10 +1,11 @@
 package com.example.madcamp_week1.db
 
+import com.example.madcamp_week1.db.contactRoom.ContactEntity
 import java.time.LocalDate
 import java.time.Month
 
-//var ContactList : ArrayList<ContactData> = arrayListOf(
-//    ContactData("AAA", "010-1111-1111"),
+//var ContactList : ArrayList<ContactEntity> = arrayListOf(
+//    ContactEntity("AAA", "010-1111-1111"),
 //    ContactData("BBB", "010-1111-2222"),
 //    ContactData("CCC", "010-1111-3333"),
 //    ContactData("DDD", "010-1111-4444"),

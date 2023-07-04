@@ -34,9 +34,9 @@ class GalleryListAdapter(private val context: android.content.Context, private v
 
         fun bind(photo_set: Photo3, context: android.content.Context, position: Int) {
             var resId1: Int? = null
-            if (!photo_set.p1.isNullOrEmpty()) {
+            if (photo_set.p1 != null) {
                 p1.visibility = VISIBLE
-                resId1 = context.resources.getIdentifier(photo_set.p1, "drawable", context.packageName)
+                resId1 = context.resources.getIdentifier(photo_set.p1.photoName, "drawable", context.packageName)
                 p1.setImageResource(resId1)
             } else {
                 resId1 = context.resources.getIdentifier("nothing", "drawable", context.packageName)
@@ -44,9 +44,9 @@ class GalleryListAdapter(private val context: android.content.Context, private v
             }
 
             var resId2: Int? = null
-            if (!photo_set.p2.isNullOrEmpty()) {
+            if (photo_set.p2 != null) {
                 p2.visibility = VISIBLE
-                resId2 = context.resources.getIdentifier(photo_set.p2, "drawable", context.packageName)
+                resId2 = context.resources.getIdentifier(photo_set.p2.photoName, "drawable", context.packageName)
                 p2.setImageResource(resId2)
             } else {
                 resId2 = context.resources.getIdentifier("nothing", "drawable", context.packageName)
@@ -54,9 +54,9 @@ class GalleryListAdapter(private val context: android.content.Context, private v
             }
 
             var resId3: Int? = null
-            if (!photo_set.p3.isNullOrEmpty()) {
+            if (photo_set.p3 != null) {
                 p3.visibility = VISIBLE
-                resId3 = context.resources.getIdentifier(photo_set.p3, "drawable", context.packageName)
+                resId3 = context.resources.getIdentifier(photo_set.p3.photoName, "drawable", context.packageName)
                 p3.setImageResource(resId3)
             } else {
                 resId3 = context.resources.getIdentifier("nothing", "drawable", context.packageName)
@@ -65,24 +65,36 @@ class GalleryListAdapter(private val context: android.content.Context, private v
 
             p1.setOnClickListener {
                 Intent(context, GalleryDetailActivity::class.java).apply {
-                    putExtra("galleryData1", resId1)
-                    putExtra("galleryData2", position * 3)
+//                    putExtra("galleryData1", resId1)
+//                    putExtra("galleryData2", position * 3)
+                    putExtra("restaurantName", photo_set.p1!!.name)
+                    putExtra("restaurantPhoto", photo_set.p1!!.photoName)
+                    putExtra("restaurantPhone", photo_set.p1!!.phoneNumber)
+                    putExtra("restaurantAddress", photo_set.p1!!.address)
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }.run { context.startActivity(this) }
             }
 
             p2.setOnClickListener {
                 Intent(context, GalleryDetailActivity::class.java).apply {
-                    putExtra("galleryData1", resId2)
-                    putExtra("galleryData2", position * 3 + 1)
+//                    putExtra("galleryData1", resId2)
+//                    putExtra("galleryData2", position * 3 + 1)
+                    putExtra("restaurantName", photo_set.p2!!.name)
+                    putExtra("restaurantPhoto", photo_set.p2!!.photoName)
+                    putExtra("restaurantPhone", photo_set.p2!!.phoneNumber)
+                    putExtra("restaurantAddress", photo_set.p2!!.address)
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }.run { context.startActivity(this) }
             }
 
             p3.setOnClickListener {
                 Intent(context, GalleryDetailActivity::class.java).apply {
-                    putExtra("galleryData1", resId3)
-                    putExtra("galleryData2", position * 3 + 2)
+//                    putExtra("galleryData1", resId3)
+//                    putExtra("galleryData2", position * 3 + 2)
+                    putExtra("restaurantName", photo_set.p3!!.name)
+                    putExtra("restaurantPhoto", photo_set.p3!!.photoName)
+                    putExtra("restaurantPhone", photo_set.p3!!.phoneNumber)
+                    putExtra("restaurantAddress", photo_set.p3!!.address)
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }.run { context.startActivity(this) }
             }

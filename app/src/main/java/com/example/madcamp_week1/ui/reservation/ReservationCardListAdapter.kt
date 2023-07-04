@@ -10,9 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.db.ReservationData
+import com.example.madcamp_week1.db.reservationRoom.ReservationEntity
 import com.google.android.material.card.MaterialCardView
 
-class ReservationCardListAdapter(private var list: MutableList<Pair<String, List<ReservationData>>>): RecyclerView.Adapter<ReservationCardListAdapter.ListItemViewHolder>() {
+//class ReservationCardListAdapter(private var list: MutableList<Pair<String, List<ReservationData>>>): RecyclerView.Adapter<ReservationCardListAdapter.ListItemViewHolder>() {
+class ReservationCardListAdapter(private var list: MutableList<Pair<String, List<ReservationEntity>>>): RecyclerView.Adapter<ReservationCardListAdapter.ListItemViewHolder>() {
     inner class ListItemViewHolder(itemView: View?): RecyclerView.ViewHolder(itemView!!) {
         private val context = itemView!!.context
 
@@ -23,12 +25,12 @@ class ReservationCardListAdapter(private var list: MutableList<Pair<String, List
         var rcv_reservation_list: RecyclerView = itemView!!.findViewById(R.id.rcv_reservation_list)
 
 
-        fun bind(item: Pair<String, List<ReservationData>>, position: Int) {
+        fun bind(item: Pair<String, List<ReservationEntity>>, position: Int) {
             var resDate = item.first
             val resarr = resDate.split("/")
             tv_rsv_card_date.text = "${resarr[0]}년 ${resarr[1].toInt()}월 ${resarr[2].toInt()}일"
 
-            var arr = ArrayList<ReservationData>()
+            var arr = ArrayList<ReservationEntity>()
 
             item.second.forEach { arr.add(it) }
 
