@@ -10,5 +10,5 @@ data class ContactEntity(
     @ColumnInfo(name = "photo_name") val photoName: String,
     @ColumnInfo(name = "phone_number") val phoneNumber: String
 ) {
-    @PrimaryKey(autoGenerate = true) val cid: Int = 0
+    @PrimaryKey(autoGenerate = true) var cid: Int = 0
 }
