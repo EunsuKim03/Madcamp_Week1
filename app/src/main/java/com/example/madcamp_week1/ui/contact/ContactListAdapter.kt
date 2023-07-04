@@ -35,15 +35,16 @@ class ContactListAdapter(private var list: MutableList<ContactEntity>): Recycler
                 println("\n\n\nherehere: ${item.photoName}\n\n\n")
                 Glide.with(context)
                     .load(Uri.parse(item.photoName))
+                    .circleCrop()
                     .error(R.drawable.ic_contact_profile)
                     .into(iv_contactProfile)
             }
 
             itemView.setOnClickListener {
                 Intent(context, ContactDetailActivity::class.java).apply {
-//                    putExtra("contactData", item)
+                    data = Uri.parse(item.photoName)
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+//                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     putExtra("cid", item.cid)
                     putExtra("name", item.name)
                     putExtra("photoName", item.photoName)

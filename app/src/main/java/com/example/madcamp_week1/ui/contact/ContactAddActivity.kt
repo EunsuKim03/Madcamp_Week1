@@ -100,6 +100,7 @@ class ContactAddActivity : AppCompatActivity() {
         // Done button listener
         done.setOnClickListener {
             if (imageUri != null) {
+                applicationContext.grantUriPermission(applicationContext.packageName, imageUri!!, Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 runBlocking { db.contactDao().insert(ContactEntity(nameVar, imageUri.toString(), phoneVar)) }
                 finish()
             }
@@ -126,6 +127,7 @@ class ContactAddActivity : AppCompatActivity() {
                 imageUri = uri
                 Glide.with(this)
                     .load(uri)
+                    .circleCrop()
                     .into(binding.editContactImage)
             }
     }
