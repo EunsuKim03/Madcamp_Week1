@@ -28,6 +28,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         currentPage = 0
 
+        if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED
+            || ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            var permissions = arrayOf(
+                android.Manifest.permission.READ_MEDIA_IMAGES,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+            ActivityCompat.requestPermissions(this, permissions, 99)
+        }
 
         // ToolBar
         val toolbar = findViewById<Toolbar>(R.id.toolbar_main_activity)
