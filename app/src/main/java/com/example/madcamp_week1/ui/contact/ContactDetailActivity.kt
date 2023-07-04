@@ -1,5 +1,7 @@
 package com.example.madcamp_week1.ui.contact
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +10,8 @@ import android.view.MenuItem
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.databinding.ActivityContactDetailBinding
 import com.example.madcamp_week1.db.ContactData
+import com.example.madcamp_week1.ui.gallery.GalleryMapActivity
+import com.example.madcamp_week1.ui.gallery.restaurantDataList
 
 class ContactDetailActivity : AppCompatActivity() {
 
@@ -40,6 +44,13 @@ class ContactDetailActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setTitle(data!!.name)
+
+
+        // 전화 앱 실행
+        binding.tvContactDetailPhonenum.setOnClickListener {
+            val dial = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${data!!.phoneNumber.replace("-", "")}"))
+            startActivity(dial)
+        }
 
     }
 

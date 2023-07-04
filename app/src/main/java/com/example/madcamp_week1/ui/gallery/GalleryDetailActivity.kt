@@ -1,6 +1,7 @@
 package com.example.madcamp_week1.ui.gallery
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
@@ -42,6 +43,8 @@ class GalleryDetailActivity : AppCompatActivity(){
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setTitle(restaurantDataList[position!!].name)
 
+
+        // Map 실행
         binding.galleryDetailAddress.setOnClickListener {
             Intent(
                 applicationContext,
@@ -52,6 +55,13 @@ class GalleryDetailActivity : AppCompatActivity(){
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }.run { applicationContext.startActivity(this) }
         }
+
+        // 전화 앱 실행
+        binding.galleryDetailPhone.setOnClickListener {
+            val dial = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${restaurantDataList[position!!].resPhone.replace("-", "")}"))
+            startActivity(dial)
+        }
+
 
     }
 
