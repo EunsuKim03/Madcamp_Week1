@@ -42,12 +42,12 @@ class ContactListAdapter(private var list: MutableList<ContactEntity>): Recycler
             itemView.setOnClickListener {
                 Intent(context, ContactDetailActivity::class.java).apply {
 //                    putExtra("contactData", item)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     putExtra("cid", item.cid)
                     putExtra("name", item.name)
                     putExtra("photoName", item.photoName)
                     putExtra("phoneNumber", item.phoneNumber)
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 }.run { context.startActivity(this) }
             }
         }
