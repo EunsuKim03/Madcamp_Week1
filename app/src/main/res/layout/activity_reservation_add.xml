@@ -31,51 +31,75 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <DatePicker
-        android:id="@+id/edit_reservation_date"
-        android:layout_width="300dp"
-        android:layout_height="440dp"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_gravity="center"
-        android:textSize="10sp"
+    <ScrollView
+        android:id="@+id/sv_rsv_add_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/edit_reservation_restaurant"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintBottom_toTopOf="@+id/edit_reservation_sub"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+        <LinearLayout
+            android:id="@+id/ll_rsv_add_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <DatePicker
+                android:id="@+id/edit_reservation_date"
+                android:layout_width="300dp"
+                android:layout_height="440dp"
+                android:layout_marginTop="?attr/actionBarSize"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_gravity="center"
+                android:textSize="10sp"
 
-    <EditText
-        android:id="@+id/edit_reservation_restaurant"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_height="wrap_content"
-        android:hint="restaurant"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/edit_reservation_date"
-        app:layout_constraintBottom_toTopOf="@id/edit_reservation_list"
-        android:layout_gravity="center"
-        tools:ignore="MissingConstraints" />
+                />
 
-    <EditText
-        android:id="@+id/edit_reservation_list"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_height="wrap_content"
-        android:hint="people list"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/edit_reservation_restaurant"
-        app:layout_constraintBottom_toTopOf="@id/edit_reservation_sub"
-        android:layout_gravity="center"
-        tools:ignore="MissingConstraints" />
+
+            <EditText
+                android:id="@+id/edit_reservation_restaurant"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_height="wrap_content"
+                android:hint="restaurant"
+                android:textSize="20sp"
+                android:focusableInTouchMode="false"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/tv_button_add_friends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Friends:"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@color/blue"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+
+
 
     <LinearLayout
         android:id="@+id/edit_reservation_sub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/sv_rsv_add_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="horizontal"
         android:weightSum="2">

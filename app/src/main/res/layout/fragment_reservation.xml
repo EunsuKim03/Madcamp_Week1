@@ -47,6 +47,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             ></androidx.recyclerview.widget.RecyclerView>
+        <TextView
+            android:id="@+id/tv_is_reservation_empty"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reservation list is empty!"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:gravity="center"
+            />
 
     </RelativeLayout>
 
@@ -61,5 +71,7 @@
 <!--        ></androidx.recyclerview.widget.RecyclerView>-->
 <!--        android:layout_marginTop="8dp"-->
 <!--        android:layout_marginBottom="8dp"-->
+
+
 
 </androidx.core.widget.NestedScrollView>
