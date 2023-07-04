@@ -69,7 +69,7 @@ class GalleryDetailActivity : AppCompatActivity(){
 
         // 전화 앱 실행
         binding.galleryDetailPhone.setOnClickListener {
-            val dial = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${restaurantDataList[position!!].resPhone.replace("-", "")}"))
+            val dial = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${phone!!.replace("-", "")}"))
             startActivity(dial)
         }
 

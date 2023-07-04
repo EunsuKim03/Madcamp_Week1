@@ -11,7 +11,6 @@ import com.example.madcamp_week1.R
 import com.example.madcamp_week1.databinding.ActivityContactDetailBinding
 import com.example.madcamp_week1.db.ContactData
 import com.example.madcamp_week1.ui.gallery.GalleryMapActivity
-import com.example.madcamp_week1.ui.gallery.restaurantDataList
 
 class ContactDetailActivity : AppCompatActivity() {
 
@@ -58,7 +57,7 @@ class ContactDetailActivity : AppCompatActivity() {
         supportActionBar?.setTitle(name)
         // 전화 앱 실행
         binding.tvContactDetailPhonenum.setOnClickListener {
-            val dial = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${phoneNumber.replace("-", "")}"))
+            val dial = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${phoneNumber!!.replace("-", "")}"))
             startActivity(dial)
         }
     }

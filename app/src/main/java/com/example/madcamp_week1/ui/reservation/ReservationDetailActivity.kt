@@ -85,7 +85,7 @@ class ReservationDetailActivity : AppCompatActivity() {
 
         // 전화 앱 실행
         binding.tvRsvDetailRestaurantPhone.setOnClickListener {
-            val dial = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${data!!.restaurant.resPhone.replace("-", "")}"))
+            val dial = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${restaurantPhone!!.replace("-", "")}"))
             startActivity(dial)
         }
     }
