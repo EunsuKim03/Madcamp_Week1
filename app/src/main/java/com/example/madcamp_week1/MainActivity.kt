@@ -1,28 +1,29 @@
 package com.example.madcamp_week1
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.madcamp_week1.databinding.ActivityMainBinding
 import com.example.madcamp_week1.ui.ViewPagerAdapter
+import com.example.madcamp_week1.ui.contact.ContactAddActivity
+import com.example.madcamp_week1.ui.gallery.GalleryAddActivity
+import com.example.madcamp_week1.ui.reservation.ReservationAddActivity
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private var currentPage = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        currentPage = 0
 
         // ToolBar
         val toolbar = findViewById<Toolbar>(R.id.toolbar_main_activity)
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
             object: ViewPager2.OnPageChangeCallback() {
 
                 override fun onPageSelected(position: Int) {
+                    currentPage = position
                     super.onPageSelected(position)
                     binding.toolbarMainActivityTitle.text = when(position) {
                         0 ->  "Contact"
@@ -52,14 +54,17 @@ class MainActivity : AppCompatActivity() {
                 R.id.navi_contact -> {
                     binding.toolbarMainActivityTitle.text = "Contact"
                     binding.pager.currentItem = 0
+                    currentPage = 0
                     return@setOnItemSelectedListener true
                 }
                 R.id.navi_gallery -> {
+                    currentPage = 1
                     binding.toolbarMainActivityTitle.text = "Gallery"
                     binding.pager.currentItem = 1
                     return@setOnItemSelectedListener true
                 }
                 R.id.navi_reservation -> {
+                    currentPage = 2
                     binding.toolbarMainActivityTitle.text = "Reservation"
                     binding.pager.currentItem = 2
                     return@setOnItemSelectedListener true
@@ -71,6 +76,39 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_add_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        when (id) {
+            R.id.toolbar_add -> {
+                when(currentPage) {
+                    0 -> {
+                        Intent(this, ContactAddActivity::class.java).apply {
+                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        }.run { applicationContext.startActivity(this) }
+                        return true
+                    }
+                    1 -> {
+                        Intent(this, GalleryAddActivity::class.java).apply {
+                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        }.run { applicationContext.startActivity(this) }
+                    }
+                    2 -> {
+                        Intent(this, ReservationAddActivity::class.java).apply {
+                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        }.run { applicationContext.startActivity(this) }
+                    }
+                }
+
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 

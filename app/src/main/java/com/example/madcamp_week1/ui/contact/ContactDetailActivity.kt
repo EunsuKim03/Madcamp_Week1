@@ -1,12 +1,17 @@
 package com.example.madcamp_week1.ui.contact
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.databinding.ActivityContactDetailBinding
 import com.example.madcamp_week1.db.ContactData
+import com.example.madcamp_week1.ui.gallery.GalleryMapActivity
+import com.example.madcamp_week1.ui.gallery.restaurantDataList
 
 class ContactDetailActivity : AppCompatActivity() {
 
@@ -40,6 +45,19 @@ class ContactDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setTitle(data!!.name)
 
+
+        // 전화 앱 실행
+        binding.tvContactDetailPhonenum.setOnClickListener {
+            val dial = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${data!!.phoneNumber.replace("-", "")}"))
+            startActivity(dial)
+        }
+
+    }
+
+    // 툴바에 삭제 버튼 추가
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_delete_menu, menu)
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -48,6 +66,9 @@ class ContactDetailActivity : AppCompatActivity() {
             android.R.id.home -> {
                 finish()
                 return true
+            }
+            R.id.toolbar_delete -> {
+                TODO("delete operation")
             }
         }
         return super.onOptionsItemSelected(item)
