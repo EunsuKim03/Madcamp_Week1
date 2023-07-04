@@ -9,17 +9,31 @@ import android.view.Menu
 import android.view.MenuItem
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import android.widget.Toast
+import androidx.room.Room
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.databinding.ActivityContactDetailBinding
 import com.example.madcamp_week1.db.ContactData
+import com.example.madcamp_week1.db.contactRoom.ContactDatabase
+import com.example.madcamp_week1.db.contactRoom.ContactEntity
 import com.example.madcamp_week1.ui.gallery.GalleryMapActivity
+import kotlinx.coroutines.runBlocking
 
 class ContactDetailActivity : AppCompatActivity() {
+
+    lateinit var db: ContactDatabase
+    var cid: Int = -1
 
     private lateinit var binding : ActivityContactDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        db = Room.databaseBuilder(
+            applicationContext,
+            ContactDatabase::class.java, "contactDB"
+        ).build()
+
         setContentView(R.layout.activity_contact_detail)
 
         binding = ActivityContactDetailBinding.inflate(layoutInflater)
@@ -38,6 +52,7 @@ class ContactDetailActivity : AppCompatActivity() {
 //        } else {
 //            binding.ivContactDetailProfile.setImageResource(this.resources.getIdentifier(data!!.photoName, "drawable", this.packageName))
 //        }
+        cid = intent.getIntExtra("cid", -1)
         val name = intent.getStringExtra("name")
         val photoName = intent.getStringExtra("photoName")
         val phoneNumber = intent.getStringExtra("phoneNumber")
@@ -83,7 +98,13 @@ class ContactDetailActivity : AppCompatActivity() {
                 return true
             }
             R.id.toolbar_delete -> {
-                TODO("delete operation")
+                val temp: ContactEntity
+                if(cid != -1) {
+                    runBlocking { temp = db.contactDao().getById(cid) }
+                    runBlocking { db.contactDao().delete(temp) }
+                    Toast.makeText(this, "Successfully deleted!", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
             }
         }
         return super.onOptionsItemSelected(item)

@@ -42,6 +42,7 @@ class ContactListAdapter(private var list: MutableList<ContactEntity>): Recycler
             itemView.setOnClickListener {
                 Intent(context, ContactDetailActivity::class.java).apply {
 //                    putExtra("contactData", item)
+                    putExtra("cid", item.cid)
                     putExtra("name", item.name)
                     putExtra("photoName", item.photoName)
                     putExtra("phoneNumber", item.phoneNumber)

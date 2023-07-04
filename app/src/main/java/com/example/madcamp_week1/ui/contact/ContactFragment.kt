@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -90,10 +92,6 @@ class ContactFragment : Fragment() {
             ContactDatabase::class.java, "contactDB"
         ).build()
 
-        println("resume")
-        binding.rcvContactList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        binding.rcvContactList.setHasFixedSize(true)
-//        binding.rcvContactList.adapter = ContactListAdapter(contactDataList)
         var contactList = ArrayList<ContactEntity>()
 
         runBlocking {
@@ -101,7 +99,18 @@ class ContactFragment : Fragment() {
             temp.forEach { contactList.add(it) }
         }
 
-        binding.rcvContactList.adapter = ContactListAdapter(contactList)
+        if(contactList.size <= 0) {
+            binding.rcvContactList.visibility = View.GONE
+            binding.tvIsEmptyList.visibility = View.VISIBLE
+        } else {
+            binding.tvIsEmptyList.visibility = View.GONE
+            binding.rcvContactList.visibility = View.VISIBLE
+            binding.rcvContactList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            binding.rcvContactList.setHasFixedSize(true)
+//        binding.rcvContactList.adapter = ContactListAdapter(contactDataList)
+
+            binding.rcvContactList.adapter = ContactListAdapter(contactList)
+        }
 
 
     }
