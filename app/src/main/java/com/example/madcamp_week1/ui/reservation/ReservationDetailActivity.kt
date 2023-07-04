@@ -22,7 +22,7 @@ class ReservationDetailActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityReservationDetailBinding
 //    private lateinit var list: ArrayList<ContactData>
-    private lateinit var list: ArrayList<ContactEntity>
+    private var list: ArrayList<ContactEntity> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reservation_detail)
