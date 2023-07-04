@@ -1,11 +1,15 @@
 package com.example.madcamp_week1.ui.contact
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import com.bumptech.glide.Glide
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.databinding.ActivityContactAddBinding
 
@@ -70,7 +74,9 @@ class ContactAddActivity : AppCompatActivity() {
 
         // Image button listener
         image.setOnClickListener {
-//            TODO()
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            activityResult.launch(intent)
         }
 
         // 이름과 번호가 모두 입력 -> Done 버튼이 활성화 (이거 뭔가 이상함, 내가 원한 대로 작동 하는게 아닌 듯)
@@ -95,6 +101,17 @@ class ContactAddActivity : AppCompatActivity() {
 
 
     }
+
+    private val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()) {
+            if(it.resultCode == RESULT_OK && it.data != null) {
+                val uri = it.data!!.data
+                Glide.with(this)
+                    .load(uri)
+                    .into(binding.editContactImage)
+            }
+    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
