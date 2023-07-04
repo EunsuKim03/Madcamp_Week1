@@ -1,6 +1,7 @@
 package com.example.madcamp_week1.ui.reservation
 
 import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.db.ReservationData
 import com.example.madcamp_week1.db.reservationRoom.ReservationEntity
@@ -64,7 +66,10 @@ class ReservationListAdapter(private var list: MutableList<ReservationEntity>): 
                 }
             }
 
-            iv_restaurant.setImageResource(context.resources.getIdentifier(item.restaurant!!.photoName, "drawable", context.packageName))
+//            iv_restaurant.setImageResource(context.resources.getIdentifier(item.restaurant!!.photoName, "drawable", context.packageName))
+            Glide.with(context)
+                .load(Uri.parse(item.restaurant!!.photoName))
+                .into(iv_restaurant)
             tv_restaurant_name.text = item.restaurant!!.name
 
             val customJson = Gson().toJson(item.friends)
