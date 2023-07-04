@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.databinding.ActivityGalleryDetailBinding
 
@@ -44,7 +45,9 @@ class GalleryDetailActivity : AppCompatActivity(){
 //        binding.galleryDetailPhone.text = restaurantDataList[position!!].resPhone
 
         binding.galleryDetailName.text = name
-        binding.galleryDetailPhoto.setImageResource(this.resources.getIdentifier(photoName, "drawable", this.packageName))
+        Glide.with(applicationContext)
+            .load(Uri.parse(photoName))
+            .into(binding.galleryDetailPhoto)
         binding.galleryDetailPhone.text = phone
         binding.galleryDetailAddress.text = address
 

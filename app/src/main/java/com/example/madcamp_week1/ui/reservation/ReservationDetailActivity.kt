@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.databinding.ActivityContactDetailBinding
 import com.example.madcamp_week1.databinding.ActivityReservationDetailBinding
@@ -57,7 +58,9 @@ class ReservationDetailActivity : AppCompatActivity() {
 //        binding.tvRsvDetailRestaurantAddr.text = data!!.restaurant.address
 //        binding.tvRsvDetailRestaurantPhone.text = data!!.restaurant.resPhone
 
-        binding.ivRsvDetailRestaurantImg.setImageResource(this.resources.getIdentifier(restaurantPhoto, "drawable", this.packageName))
+        Glide.with(this)
+            .load(Uri.parse(restaurantPhoto))
+            .into(binding.ivRsvDetailRestaurantImg)
         binding.tvRsvDetailRestaurantName.text = restaurantName
         binding.tvRsvDetailRestaurantAddr.text = restaurantAddress
         binding.tvRsvDetailRestaurantPhone.text = restaurantPhone

@@ -2,6 +2,8 @@ package com.example.madcamp_week1.ui.contact
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,13 +32,12 @@ class ContactListAdapter(private var list: MutableList<ContactEntity>): Recycler
                 iv_contactProfile.setImageResource(context.resources.getIdentifier("ic_contact_profile", "drawable", context.packageName))
             } else {
 //                iv_contactProfile.setImageResource(context.resources.getIdentifier(item.photoName, "drawable", context.packageName))
-                println("\n\n\nphoto_name: ${item.photoName}\n\n\n")
+                println("\n\n\nherehere: ${item.photoName}\n\n\n")
                 Glide.with(context)
                     .load(Uri.parse(item.photoName))
                     .error(R.drawable.ic_contact_profile)
                     .into(iv_contactProfile)
             }
-
 
             itemView.setOnClickListener {
                 Intent(context, ContactDetailActivity::class.java).apply {
@@ -46,6 +47,7 @@ class ContactListAdapter(private var list: MutableList<ContactEntity>): Recycler
                     putExtra("photoName", item.photoName)
                     putExtra("phoneNumber", item.phoneNumber)
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 }.run { context.startActivity(this) }
             }
         }
