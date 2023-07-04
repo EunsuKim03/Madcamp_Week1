@@ -58,6 +58,8 @@ class ContactAddActivity : AppCompatActivity() {
                 nameVar = name.text.toString()
                 if ((nameVar != "") && (phoneVar != "")) {
                     done.setBackgroundColor(Color.parseColor("#6D7EFD"))
+                } else {
+                    done.setBackgroundColor(Color.parseColor("#D0D0D0"))
                 }
             }
 
@@ -68,22 +70,13 @@ class ContactAddActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//                phoneVar = phone.text.toString()
-
-//                // 여기서 done 처리 할까 그냥
-//                done.setBackgroundColor(Color.parseColor("#6D7EFD"))
-//                // Done button listener
-//                done.setOnClickListener {
-////                TODO()
-//                }
             }
-
-
-
             override fun afterTextChanged(p0: Editable?) {
                 phoneVar = phone.text.toString()
                 if ((nameVar != "") && (phoneVar != "")) {
                     done.setBackgroundColor(Color.parseColor("#6D7EFD"))
+                } else {
+                    done.setBackgroundColor(Color.parseColor("#D0D0D0"))
                 }
             }
 
@@ -95,7 +88,6 @@ class ContactAddActivity : AppCompatActivity() {
             intent.type = "image/*"
             activityResult.launch(intent)
         }
-
 
         // Done button listener
         done.setOnClickListener {

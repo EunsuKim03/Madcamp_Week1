@@ -67,7 +67,7 @@ class GalleryFragment : Fragment() {
         val list2 = _list.filterIndexed { i, _ -> i%3 == 1 }
         val list3 = _list.filterIndexed { i, _ -> i%3 == 2 }
         val photolist = list1.zip(list2).zip(list3) { (s1, s2), s3 -> Photo3(s1, s2, s3) }
-        println("\n\n\n${_list.size}\n\n\n")
+
 
         val galleryViewModel =
             ViewModelProvider(this)

@@ -59,6 +59,8 @@ class GalleryAddActivity : AppCompatActivity() {
                 nameVar = name.text.toString()
                 if ((nameVar != "") && (phoneVar != "") && (addrVar != "")) {
                     done.setBackgroundColor(Color.parseColor("#6D7EFD"))
+                } else {
+                    done.setBackgroundColor(Color.parseColor("#D0D0D0"))
                 }
             }
 
@@ -75,6 +77,8 @@ class GalleryAddActivity : AppCompatActivity() {
                 addrVar = addr.text.toString()
                 if ((nameVar != "") && (phoneVar != "") && (addrVar != "")) {
                     done.setBackgroundColor(Color.parseColor("#6D7EFD"))
+                } else {
+                    done.setBackgroundColor(Color.parseColor("#D0D0D0"))
                 }
             }
 
@@ -91,6 +95,8 @@ class GalleryAddActivity : AppCompatActivity() {
                 phoneVar = phone.text.toString()
                 if ((nameVar != "") && (phoneVar != "") && (addrVar != "")) {
                     done.setBackgroundColor(Color.parseColor("#6D7EFD"))
+                } else {
+                    done.setBackgroundColor(Color.parseColor("#D0D0D0"))
                 }
             }
 
