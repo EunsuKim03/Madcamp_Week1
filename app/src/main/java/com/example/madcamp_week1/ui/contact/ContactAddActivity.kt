@@ -1,6 +1,8 @@
 package com.example.madcamp_week1.ui.contact
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -8,6 +10,9 @@ import android.text.TextWatcher
 import android.view.MenuItem
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.room.Room
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import com.bumptech.glide.Glide
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.databinding.ActivityContactAddBinding
 import com.example.madcamp_week1.db.contactRoom.ContactDatabase
@@ -17,6 +22,7 @@ import kotlinx.coroutines.runBlocking
 
 class ContactAddActivity : AppCompatActivity() {
     private lateinit var binding : ActivityContactAddBinding
+    private var imageUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,17 +91,18 @@ class ContactAddActivity : AppCompatActivity() {
 
         // Image button listener
         image.setOnClickListener {
-//            TODO()
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            activityResult.launch(intent)
         }
-
-
-
 
 
         // Done button listener
         done.setOnClickListener {
-           runBlocking { db.contactDao().insert(ContactEntity(nameVar, "person_beenzino", phoneVar)) }
-            finish()
+            if (imageUri != null) {
+                runBlocking { db.contactDao().insert(ContactEntity(nameVar, imageUri.toString(), phoneVar)) }
+                finish()
+            }
         }
 
         // Cancel button listener
@@ -111,6 +118,18 @@ class ContactAddActivity : AppCompatActivity() {
 
 
     }
+
+    private val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()) {
+            if(it.resultCode == RESULT_OK && it.data != null) {
+                val uri = it.data!!.data
+                imageUri = uri
+                Glide.with(this)
+                    .load(uri)
+                    .into(binding.editContactImage)
+            }
+    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
