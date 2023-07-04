@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
@@ -80,8 +82,33 @@ class ContactFragment : Fragment() {
         return root
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        var db = Room.databaseBuilder(
+            requireContext().applicationContext,
+            ContactDatabase::class.java, "contactDB"
+        ).build()
+
+        println("resume")
+        binding.rcvContactList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.rcvContactList.setHasFixedSize(true)
+//        binding.rcvContactList.adapter = ContactListAdapter(contactDataList)
+        var contactList = ArrayList<ContactEntity>()
+
+        runBlocking {
+            val temp = db.contactDao().getAll()
+            temp.forEach { contactList.add(it) }
+        }
+
+        binding.rcvContactList.adapter = ContactListAdapter(contactList)
+
+
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
 }

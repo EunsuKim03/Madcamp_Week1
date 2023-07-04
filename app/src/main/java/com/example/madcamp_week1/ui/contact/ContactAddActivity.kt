@@ -94,7 +94,8 @@ class ContactAddActivity : AppCompatActivity() {
 
         // Done button listener
         done.setOnClickListener {
-           runBlocking { db.contactDao().insert(ContactEntity(nameVar, uri, phoneVar)) }
+           runBlocking { db.contactDao().insert(ContactEntity(nameVar, "person_beenzino", phoneVar)) }
+            finish()
         }
 
         // Cancel button listener
