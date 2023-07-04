@@ -18,36 +18,47 @@ class GalleryDetailActivity : AppCompatActivity(){
         binding = ActivityGalleryDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val resId = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            intent.getIntExtra("galleryData1", 0)
-        } else {
-            null
-        }
+//        val resId = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//            intent.getIntExtra("galleryData1", 0)
+//        } else {
+//            null
+//        }
+//
+//        val position = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//            intent.getIntExtra("galleryData2", 0)
+//        } else {
+//            null
+//        }
 
-        val position = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            intent.getIntExtra("galleryData2", 0)
-        } else {
-            null
-        }
+        val name = intent.getStringExtra("restaurantName")
+        val photoName = intent.getStringExtra("restaurantPhoto")
+        val phone = intent.getStringExtra("restaurantPhone")
+        val address = intent.getStringExtra("restaurantAddress")
 
-        binding.galleryDetailPhoto.setImageResource(resId!!)
-        binding.galleryDetailAddress.text = restaurantDataList[position!!].address
-        binding.galleryDetailName.text = restaurantDataList[position!!].name
-        binding.galleryDetailPhone.text = restaurantDataList[position!!].resPhone
+
+//        binding.galleryDetailPhoto.setImageResource(resId!!)
+//        binding.galleryDetailAddress.text = restaurantDataList[position!!].address
+//        binding.galleryDetailName.text = restaurantDataList[position!!].name
+//        binding.galleryDetailPhone.text = restaurantDataList[position!!].resPhone
+
+        binding.galleryDetailName.text = name
+        binding.galleryDetailPhoto.setImageResource(this.resources.getIdentifier(photoName, "drawable", this.packageName))
+        binding.galleryDetailPhone.text = phone
+        binding.galleryDetailAddress.text = address
 
         // Toolbar
         val toolbar = binding.toolbarGallery
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setTitle(restaurantDataList[position!!].name)
+        supportActionBar?.setTitle(name)
 
         binding.galleryDetailAddress.setOnClickListener {
             Intent(
                 applicationContext,
                 GalleryMapActivity::class.java
             ).apply{
-                putExtra("galleryMapAddr", restaurantDataList[position!!].address)
-                putExtra("galleryMapName", restaurantDataList[position!!].name)
+                putExtra("galleryMapAddr", address)
+                putExtra("galleryMapName", name)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }.run { applicationContext.startActivity(this) }
         }

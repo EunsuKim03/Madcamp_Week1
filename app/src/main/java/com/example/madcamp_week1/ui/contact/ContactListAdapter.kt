@@ -9,8 +9,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.db.ContactData
+import com.example.madcamp_week1.db.contactRoom.ContactEntity
 
-class ContactListAdapter(private var list: MutableList<ContactData>): RecyclerView.Adapter<ContactListAdapter.ListItemViewHolder> () {
+//class ContactListAdapter(private var list: MutableList<ContactData>): RecyclerView.Adapter<ContactListAdapter.ListItemViewHolder> () {
+class ContactListAdapter(private var list: MutableList<ContactEntity>): RecyclerView.Adapter<ContactListAdapter.ListItemViewHolder> () {
     inner class ListItemViewHolder(itemView: View?): RecyclerView.ViewHolder(itemView!!) {
         private val context = itemView!!.context
 
@@ -18,7 +20,7 @@ class ContactListAdapter(private var list: MutableList<ContactData>): RecyclerVi
         var tv_phoneNum: TextView = itemView!!.findViewById(R.id.tv_contactPhone)
         var iv_contactProfile: ImageView = itemView!!.findViewById(R.id.iv_contactProfile)
 
-        fun bind(item: ContactData, position: Int) {
+        fun bind(item: ContactEntity, position: Int) {
             tv_name.text = item.name
             tv_phoneNum.text = item.phoneNumber
             // if in drawable
@@ -31,7 +33,10 @@ class ContactListAdapter(private var list: MutableList<ContactData>): RecyclerVi
 
             itemView.setOnClickListener {
                 Intent(context, ContactDetailActivity::class.java).apply {
-                    putExtra("contactData", item)
+//                    putExtra("contactData", item)
+                    putExtra("name", item.name)
+                    putExtra("photoName", item.photoName)
+                    putExtra("phoneNumber", item.phoneNumber)
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }.run { context.startActivity(this) }
             }

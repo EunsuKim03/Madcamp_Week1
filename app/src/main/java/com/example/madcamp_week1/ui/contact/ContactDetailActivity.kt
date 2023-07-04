@@ -19,27 +19,38 @@ class ContactDetailActivity : AppCompatActivity() {
         binding = ActivityContactDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val data = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra("contactData", ContactData::class.java)
-        } else {
-            intent.getParcelableExtra("contactData") as? ContactData
-        }
+//        val data = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//            intent.getParcelableExtra("contactData", ContactData::class.java)
+//        } else {
+//            intent.getParcelableExtra("contactData") as? ContactData
+//        }
+//
+//        binding.tvContactDetailName.text = data!!.name
+//        binding.tvContactDetailPhonenum.text = data!!.phoneNumber
+//        if(data!!.photoName == "") {
+//            binding.ivContactDetailProfile.setImageResource(this.resources.getIdentifier("ic_contact_profile", "drawable", this.packageName))
+//        } else {
+//            binding.ivContactDetailProfile.setImageResource(this.resources.getIdentifier(data!!.photoName, "drawable", this.packageName))
+//        }
+        val name = intent.getStringExtra("name")
+        val photoName = intent.getStringExtra("photoName")
+        val phoneNumber = intent.getStringExtra("phoneNumber")
 
-        binding.tvContactDetailName.text = data!!.name
-        binding.tvContactDetailPhonenum.text = data!!.phoneNumber
-        if(data!!.photoName == "") {
+        binding.tvContactDetailName.text = name
+        binding.tvContactDetailPhonenum.text = phoneNumber
+
+        if(photoName == "") {
             binding.ivContactDetailProfile.setImageResource(this.resources.getIdentifier("ic_contact_profile", "drawable", this.packageName))
         } else {
-            binding.ivContactDetailProfile.setImageResource(this.resources.getIdentifier(data!!.photoName, "drawable", this.packageName))
+            binding.ivContactDetailProfile.setImageResource(this.resources.getIdentifier(photoName, "drawable", this.packageName))
         }
-
 
         // Toolbar
         val toolbar = binding.toolbarContact
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setTitle(data!!.name)
-
+//        supportActionBar?.setTitle(data!!.name)
+        supportActionBar?.setTitle(name)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

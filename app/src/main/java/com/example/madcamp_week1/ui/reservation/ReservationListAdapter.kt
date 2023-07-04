@@ -10,9 +10,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.db.ReservationData
+import com.example.madcamp_week1.db.reservationRoom.ReservationEntity
 import com.example.madcamp_week1.ui.contact.ContactDetailActivity
+import com.google.gson.Gson
 
-class ReservationListAdapter(private var list: MutableList<ReservationData>): RecyclerView.Adapter<ReservationListAdapter.ListItemViewHolder>() {
+//class ReservationListAdapter(private var list: MutableList<ReservationData>): RecyclerView.Adapter<ReservationListAdapter.ListItemViewHolder>() {
+class ReservationListAdapter(private var list: MutableList<ReservationEntity>): RecyclerView.Adapter<ReservationListAdapter.ListItemViewHolder>() {
     inner class ListItemViewHolder(itemView: View?): RecyclerView.ViewHolder(itemView!!) {
         private val context = itemView!!.context
 
@@ -20,11 +23,11 @@ class ReservationListAdapter(private var list: MutableList<ReservationData>): Re
         var tv_restaurant_name : TextView = itemView!!.findViewById(R.id.tv_restaurant_name)
         var ll_friends_list : LinearLayout = itemView!!.findViewById(R.id.ll_friends_list)
 
-        fun bind(item: ReservationData, position: Int) {
-            if(item.contacts.size >= 4) {
+        fun bind(item: ReservationEntity, position: Int) {
+            if(item.friends!!.size >= 4) {
                 for(i: Int in 0 .. 1) {
-                    val textView: TextView = TextView(context)
-                    textView.setText(item.contacts[i].name)
+                    val textView = TextView(context)
+                    textView.setText(item.friends[i].name)
                     textView.textSize = 12f
                     textView.id = i
 
@@ -36,7 +39,7 @@ class ReservationListAdapter(private var list: MutableList<ReservationData>): Re
                     ll_friends_list.addView(textView)
                 }
                 val textView: TextView = TextView(context)
-                textView.setText("외 ${item.contacts.size - 2} 명")
+                textView.setText("외 ${item.friends.size - 2} 명")
                 textView.textSize = 12f
 
                 val param : LinearLayout.LayoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
@@ -46,9 +49,9 @@ class ReservationListAdapter(private var list: MutableList<ReservationData>): Re
                 textView.layoutParams = param
                 ll_friends_list.addView(textView)
             } else {
-                for(i: Int in 0 until item.contacts.size) {
+                for(i: Int in 0 until item.friends.size) {
                     val textView: TextView = TextView(context)
-                    textView.setText(item.contacts[i].name)
+                    textView.setText(item.friends[i].name)
                     textView.textSize = 12f
                     textView.id = i
 
@@ -61,13 +64,21 @@ class ReservationListAdapter(private var list: MutableList<ReservationData>): Re
                 }
             }
 
-            iv_restaurant.setImageResource(context.resources.getIdentifier(item.restaurant.photoName, "drawable", context.packageName))
-            tv_restaurant_name.text = item.restaurant.name
+            iv_restaurant.setImageResource(context.resources.getIdentifier(item.restaurant!!.photoName, "drawable", context.packageName))
+            tv_restaurant_name.text = item.restaurant!!.name
+
+            val customJson = Gson().toJson(item.friends)
 
             // click event listener for detailed reservation page here
             itemView.setOnClickListener {
                 Intent(context, ReservationDetailActivity::class.java).apply {
-                    putExtra("reservationData", item)
+                    putExtra("restaurantName", item.restaurant.name)
+                    putExtra("restaurantPhoto", item.restaurant.photoName)
+                    putExtra("restaurantPhone", item.restaurant.phoneNumber)
+                    putExtra("restaurantAddress", item.restaurant.address)
+                    putExtra("contacts", customJson)
+
+                    putExtra("date", item.date)
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }.run { context.startActivity(this) }
             }
