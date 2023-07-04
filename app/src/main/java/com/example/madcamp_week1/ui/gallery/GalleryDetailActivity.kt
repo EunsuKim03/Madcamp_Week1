@@ -1,8 +1,10 @@
 package com.example.madcamp_week1.ui.gallery
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.madcamp_week1.R
@@ -52,6 +54,8 @@ class GalleryDetailActivity : AppCompatActivity(){
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setTitle(name)
 
+
+        // Map 실행
         binding.galleryDetailAddress.setOnClickListener {
             Intent(
                 applicationContext,
@@ -63,6 +67,18 @@ class GalleryDetailActivity : AppCompatActivity(){
             }.run { applicationContext.startActivity(this) }
         }
 
+        // 전화 앱 실행
+        binding.galleryDetailPhone.setOnClickListener {
+            val dial = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${restaurantDataList[position!!].resPhone.replace("-", "")}"))
+            startActivity(dial)
+        }
+
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_delete_menu, menu)
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -71,6 +87,9 @@ class GalleryDetailActivity : AppCompatActivity(){
             android.R.id.home -> {
                 finish()
                 return true
+            }
+            R.id.toolbar_delete -> {
+                TODO("delete operation")
             }
         }
         return super.onOptionsItemSelected(item)

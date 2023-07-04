@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.gallery.GalleryAddActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_gallery_add"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:background="@color/toolbar_color"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/edit_gallery_image"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/edit_gallery_name"
+        android:src="@drawable/ic_gallery_search"
+        />
+
+    <EditText
+        android:id="@+id/edit_gallery_name"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="name"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/edit_gallery_image"
+        app:layout_constraintBottom_toTopOf="@+id/edit_gallery_address"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/edit_gallery_address"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_height="wrap_content"
+        android:hint="address"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/edit_gallery_name"
+        app:layout_constraintBottom_toTopOf="@id/edit_gallery_phone"
+        android:layout_gravity="center"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/edit_gallery_phone"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_height="wrap_content"
+        android:hint="phone number"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/edit_gallery_address"
+        app:layout_constraintBottom_toTopOf="@id/edit_gallery_sub"
+        android:layout_gravity="center"
+        tools:ignore="MissingConstraints" />
+
+    <LinearLayout
+        android:id="@+id/edit_gallery_sub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/edit_gallery_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:gravity="center"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/edit_gallery_done"
+            android:background="@color/red"
+            tools:ignore="MissingConstraints"
+            />
+
+        <TextView
+            android:id="@+id/edit_gallery_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/edit_gallery_cancel"
+            android:text="Done"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@color/gray"
+            tools:ignore="MissingConstraints" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

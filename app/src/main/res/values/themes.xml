@@ -13,7 +13,7 @@
 <!--        &lt;!&ndash; Status bar color. &ndash;&gt;-->
 <!--        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>-->
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/purple_700</item>
+        <item name="colorPrimary">#E45477</item>
         <item name="colorPrimaryDark">@color/black</item>
         <item name="colorAccent">@color/purple_500</item>
     </style>
