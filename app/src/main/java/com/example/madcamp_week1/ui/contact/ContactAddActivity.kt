@@ -101,6 +101,7 @@ class ContactAddActivity : AppCompatActivity() {
         done.setOnClickListener {
             if (imageUri != null) {
                 runBlocking { db.contactDao().insert(ContactEntity(nameVar, imageUri.toString(), phoneVar)) }
+                finish()
             }
         }
 
