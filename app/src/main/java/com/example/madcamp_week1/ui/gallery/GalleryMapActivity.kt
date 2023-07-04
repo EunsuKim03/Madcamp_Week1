@@ -40,14 +40,34 @@ class GalleryMapActivity : AppCompatActivity() {
         binding.galleryMap.addView(mapView)
 
         val location = Geocoder(applicationContext, Locale.KOREA).getFromLocationName(addr!!, 1)?.let {
-            Location("").apply {
-                latitude = it[0].latitude
-                longitude = it[0].longitude
-            } ?: Location("").apply {
-                latitude = 37.53737528
-                longitude = 127.00557633
+            if (!it.isEmpty()) {
+                Location("").apply {
+                    latitude = it[0].latitude
+                    longitude = it[0].longitude
+                } ?: Location("").apply {
+                    latitude = 37.53737528
+                    longitude = 127.00557633
+                }
+            } else {
+                Geocoder(applicationContext, Locale.KOREA).getFromLocationName(name!!, 1)?.let {
+                    if (!it.isEmpty()) {
+                        Location("").apply {
+                            latitude = it[0].latitude
+                            longitude = it[0].longitude
+                        } ?: Location("").apply {
+                            latitude = 37.53737528
+                            longitude = 127.00557633
+                        }
+                    } else {
+                        Location("").apply {
+                            latitude = 37.53737528
+                            longitude = 127.00557633
+                        }
+                    }
+                }
             }
         }
+
 
         println("\n\n\n lat: ${location?.latitude}\nlong: ${location?.longitude}\n\n\n")
 
