@@ -16,6 +16,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.reservation.ReservationAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.gallery.GalleryAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.contact.ContactAddActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.reservation.ReservationDetailActivity"
             android:exported="false" />
         <activity

@@ -3,6 +3,7 @@ package com.example.madcamp_week1.ui.gallery
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.madcamp_week1.R
@@ -54,12 +55,20 @@ class GalleryDetailActivity : AppCompatActivity(){
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_delete_menu, menu)
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
         when (id) {
             android.R.id.home -> {
                 finish()
                 return true
+            }
+            R.id.toolbar_delete -> {
+                TODO("delete operation")
             }
         }
         return super.onOptionsItemSelected(item)
