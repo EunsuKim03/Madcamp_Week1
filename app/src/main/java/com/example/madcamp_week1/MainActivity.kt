@@ -1,11 +1,14 @@
 package com.example.madcamp_week1
 
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.madcamp_week1.databinding.ActivityMainBinding
 import com.example.madcamp_week1.ui.ViewPagerAdapter
@@ -24,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         currentPage = 0
+
 
         // ToolBar
         val toolbar = findViewById<Toolbar>(R.id.toolbar_main_activity)

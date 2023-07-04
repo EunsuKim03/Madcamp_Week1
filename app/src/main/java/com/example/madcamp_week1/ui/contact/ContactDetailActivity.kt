@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.databinding.ActivityContactDetailBinding
 import com.example.madcamp_week1.db.ContactData
@@ -43,10 +45,15 @@ class ContactDetailActivity : AppCompatActivity() {
         binding.tvContactDetailName.text = name
         binding.tvContactDetailPhonenum.text = phoneNumber
 
+        println("\n\n\nhere: $photoName\n\n\n")
+
         if(photoName == "") {
             binding.ivContactDetailProfile.setImageResource(this.resources.getIdentifier("ic_contact_profile", "drawable", this.packageName))
         } else {
-            binding.ivContactDetailProfile.setImageResource(this.resources.getIdentifier(photoName, "drawable", this.packageName))
+            Glide.with(applicationContext)
+                .load(Uri.parse(photoName))
+                .error(R.drawable.ic_contact_profile)
+                .into(binding.ivContactDetailProfile)
         }
 
         // Toolbar

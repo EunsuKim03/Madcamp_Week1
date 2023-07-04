@@ -1,12 +1,14 @@
 package com.example.madcamp_week1.ui.gallery
 
 import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.ui.contact.ContactDetailActivity
 
@@ -33,33 +35,30 @@ class GalleryListAdapter(private val context: android.content.Context, private v
         private val p3: ImageView = itemView.findViewById<ImageView>(R.id.photo3)
 
         fun bind(photo_set: Photo3, context: android.content.Context, position: Int) {
-            var resId1: Int? = null
             if (photo_set.p1 != null) {
                 p1.visibility = VISIBLE
-                resId1 = context.resources.getIdentifier(photo_set.p1.photoName, "drawable", context.packageName)
-                p1.setImageResource(resId1)
+                Glide.with(context)
+                    .load(Uri.parse(photo_set.p1.photoName))
+                    .into(p1)
             } else {
-                resId1 = context.resources.getIdentifier("nothing", "drawable", context.packageName)
                 p1.setImageResource(R.mipmap.ic_launcher)
             }
 
-            var resId2: Int? = null
             if (photo_set.p2 != null) {
                 p2.visibility = VISIBLE
-                resId2 = context.resources.getIdentifier(photo_set.p2.photoName, "drawable", context.packageName)
-                p2.setImageResource(resId2)
+                Glide.with(context)
+                    .load(Uri.parse(photo_set.p2.photoName))
+                    .into(p2)
             } else {
-                resId2 = context.resources.getIdentifier("nothing", "drawable", context.packageName)
                 p2.setImageResource(R.mipmap.ic_launcher)
             }
 
-            var resId3: Int? = null
             if (photo_set.p3 != null) {
                 p3.visibility = VISIBLE
-                resId3 = context.resources.getIdentifier(photo_set.p3.photoName, "drawable", context.packageName)
-                p3.setImageResource(resId3)
+                Glide.with(context)
+                    .load(Uri.parse(photo_set.p3.photoName))
+                    .into(p3)
             } else {
-                resId3 = context.resources.getIdentifier("nothing", "drawable", context.packageName)
                 p3.setImageResource(R.mipmap.ic_launcher)
             }
 

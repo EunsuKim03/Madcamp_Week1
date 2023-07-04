@@ -2,6 +2,7 @@ package com.example.madcamp_week1.ui.gallery
 
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -9,14 +10,20 @@ import android.text.TextWatcher
 import android.view.MenuItem
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.room.Room
 import com.bumptech.glide.Glide
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.databinding.ActivityContactAddBinding
 import com.example.madcamp_week1.databinding.ActivityGalleryAddBinding
+import com.example.madcamp_week1.db.contactRoom.ContactDatabase
+import com.example.madcamp_week1.db.contactRoom.ContactEntity
+import com.example.madcamp_week1.db.restaurantRoom.RestaurantDatabase
+import com.example.madcamp_week1.db.restaurantRoom.RestaurantEntity
+import kotlinx.coroutines.runBlocking
 
 class GalleryAddActivity : AppCompatActivity() {
     private lateinit var binding : ActivityGalleryAddBinding
-
+    private var imageUri: Uri? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gallery_add)
@@ -36,57 +43,56 @@ class GalleryAddActivity : AppCompatActivity() {
         var addrVar: String = ""
         var phoneVar: String = ""
 
-        var nameOn = false
-        var addrOn = false
-        var phoneOn = false
+        var db = Room.databaseBuilder(
+            applicationContext,
+            RestaurantDatabase::class.java, "restaurantDB"
+        ).build()
 
         name.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                nameOn = false
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                nameVar = name.text.toString()
-                nameOn = true
             }
 
-            override fun afterTextChanged(p0: Editable?) {}
+            override fun afterTextChanged(p0: Editable?) {
+                nameVar = name.text.toString()
+                if ((nameVar != "") && (phoneVar != "") && (addrVar != "")) {
+                    done.setBackgroundColor(Color.parseColor("#6D7EFD"))
+                }
+            }
 
         })
 
         addr.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                addrOn = false
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                addrVar = addr.text.toString()
-                addrOn = true
             }
 
-            override fun afterTextChanged(p0: Editable?) {}
+            override fun afterTextChanged(p0: Editable?) {
+                addrVar = addr.text.toString()
+                if ((nameVar != "") && (phoneVar != "") && (addrVar != "")) {
+                    done.setBackgroundColor(Color.parseColor("#6D7EFD"))
+                }
+            }
 
         })
 
         phone.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                phoneOn = false
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                phoneVar = phone.text.toString()
-                phoneOn = true
-
-                // 여기서 done 처리 할까 그냥
-                println("\n\ndone enabled\n\n")
-                done.setBackgroundColor(Color.parseColor("#6D7EFD"))
-                // Done button listener
-                done.setOnClickListener {
-    //                TODO()
-                }
             }
 
-            override fun afterTextChanged(p0: Editable?) {}
+            override fun afterTextChanged(p0: Editable?) {
+                phoneVar = phone.text.toString()
+                if ((nameVar != "") && (phoneVar != "") && (addrVar != "")) {
+                    done.setBackgroundColor(Color.parseColor("#6D7EFD"))
+                }
+            }
 
         })
 
@@ -97,12 +103,11 @@ class GalleryAddActivity : AppCompatActivity() {
             activityResult.launch(intent)
         }
 
-        // 이름과 주소, 번호가 모두 입력 -> Done 버튼이 활성화 (이상함)
-        if (nameOn && addrOn && phoneOn) {
-            done.setBackgroundColor(0x6D7EFD)
-            // Done button listener
-            done.setOnClickListener {
-                TODO()
+        // Done button listener
+        done.setOnClickListener {
+            if (imageUri != null) {
+                runBlocking { db.restaurantDao().insert(RestaurantEntity(nameVar, imageUri.toString(), phoneVar, addrVar)) }
+                finish()
             }
         }
 
@@ -124,6 +129,7 @@ class GalleryAddActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()) {
         if(it.resultCode == RESULT_OK && it.data != null) {
             val uri = it.data!!.data
+            imageUri = uri
             Glide.with(this)
                 .load(uri)
                 .into(binding.editGalleryImage)

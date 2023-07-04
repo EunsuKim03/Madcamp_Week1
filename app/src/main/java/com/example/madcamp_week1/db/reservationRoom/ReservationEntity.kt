@@ -19,11 +19,11 @@ class Converters {
 
 @Entity(tableName = "table_reservation_")
 data class ReservationEntity(
-    @PrimaryKey(autoGenerate = true) val rsid: Int,
+
     @Embedded val restaurant: RestaurantEntity?,
     val friends: List<ContactEntity>?,
     @ColumnInfo("date") val date: String
 ) {
-    constructor(): this(0, null, null, "")
+    @PrimaryKey(autoGenerate = true) var rsid: Int = 0
 }
 
