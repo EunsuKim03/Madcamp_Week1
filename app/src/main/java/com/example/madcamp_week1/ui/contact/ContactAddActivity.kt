@@ -2,6 +2,7 @@ package com.example.madcamp_week1.ui.contact
 
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -21,6 +22,7 @@ import kotlinx.coroutines.runBlocking
 
 class ContactAddActivity : AppCompatActivity() {
     private lateinit var binding : ActivityContactAddBinding
+    private var imageUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,12 +97,11 @@ class ContactAddActivity : AppCompatActivity() {
         }
 
 
-
-
-
         // Done button listener
         done.setOnClickListener {
-           runBlocking { db.contactDao().insert(ContactEntity(nameVar, uri, phoneVar)) }
+            if (imageUri != null) {
+                runBlocking { db.contactDao().insert(ContactEntity(nameVar, imageUri.toString(), phoneVar)) }
+            }
         }
 
         // Cancel button listener
@@ -121,6 +122,7 @@ class ContactAddActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()) {
             if(it.resultCode == RESULT_OK && it.data != null) {
                 val uri = it.data!!.data
+                imageUri = uri
                 Glide.with(this)
                     .load(uri)
                     .into(binding.editContactImage)
