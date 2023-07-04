@@ -17,6 +17,9 @@ interface RestaurantDao {
     @Query("SELECT * FROM table_restaurant_ WHERE rtid = :rtid")
     suspend fun getById(rtid: Int): RestaurantEntity
 
+    @Query("SELECT * FROM table_restaurant_ WHERE name = :name")
+    suspend fun getByName(name: String): RestaurantEntity
+
     // replace if conflicts
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(contact: RestaurantEntity)

@@ -63,21 +63,30 @@ class ReservationFragment : Fragment() {
 
         runBlocking { temp = db.reservationDao().getAll() }
 
+        if(temp.size <= 0) {
+            binding.rcvReservationList.visibility = View.GONE
+            binding.tvIsReservationEmpty.visibility = View.VISIBLE
+        } else {
+            binding.tvIsReservationEmpty.visibility = View.GONE
+            binding.rcvReservationList.visibility = View.VISIBLE
+            var reservationList = ArrayList<ReservationEntity>()
 
-        var reservationList = ArrayList<ReservationEntity>()
+            temp.forEach { reservationList.add(it) }
 
-        temp.forEach { reservationList.add(it) }
+            reservationList.sortWith(compareBy {it.date})
 
-        reservationList.sortWith(compareBy {it.date})
+            var dataListByDate = ArrayList<Pair<String, List<ReservationEntity>>>()
 
-        var dataListByDate = ArrayList<Pair<String, List<ReservationEntity>>>()
+            reservationList.groupBy { it.date }.entries.map { dataListByDate.add(Pair(it.key, it.value)) }.toList()
 
-        reservationList.groupBy { it.date }.entries.map { dataListByDate.add(Pair(it.key, it.value)) }.toList()
-
-        binding.rcvReservationList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        binding.rcvReservationList.setHasFixedSize(true)
+            binding.rcvReservationList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            binding.rcvReservationList.setHasFixedSize(true)
 //        binding.rcvReservationList.adapter = ReservationListAdapter(dataList)
-        binding.rcvReservationList.adapter = ReservationCardListAdapter(dataListByDate)
+            binding.rcvReservationList.adapter = ReservationCardListAdapter(dataListByDate)
+        }
+
+
+
 
         val root: View = binding.root
 
@@ -86,6 +95,42 @@ class ReservationFragment : Fragment() {
 //            textView.text = it
 //        }
         return root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        var db = Room.databaseBuilder(
+            requireContext().applicationContext,
+            ReservationDatabase::class.java, "reservationDB"
+        ).build()
+
+        val temp: List<ReservationEntity>
+
+        runBlocking { temp = db.reservationDao().getAll() }
+
+        if(temp.size <= 0) {
+            binding.rcvReservationList.visibility = View.GONE
+            binding.tvIsReservationEmpty.visibility = View.VISIBLE
+        } else {
+            binding.tvIsReservationEmpty.visibility = View.GONE
+            binding.rcvReservationList.visibility = View.VISIBLE
+            var reservationList = ArrayList<ReservationEntity>()
+
+            temp.forEach { reservationList.add(it) }
+
+            reservationList.sortWith(compareBy {it.date})
+
+            var dataListByDate = ArrayList<Pair<String, List<ReservationEntity>>>()
+
+            reservationList.groupBy { it.date }.entries.map { dataListByDate.add(Pair(it.key, it.value)) }.toList()
+
+            binding.rcvReservationList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            binding.rcvReservationList.setHasFixedSize(true)
+//        binding.rcvReservationList.adapter = ReservationListAdapter(dataList)
+            binding.rcvReservationList.adapter = ReservationCardListAdapter(dataListByDate)
+        }
+
     }
 
     override fun onDestroyView() {
