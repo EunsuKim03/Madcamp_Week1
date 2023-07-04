@@ -67,6 +67,7 @@ class ContactDetailActivity : AppCompatActivity() {
         } else {
             Glide.with(applicationContext)
                 .load(Uri.parse(photoName))
+                .circleCrop()
                 .error(R.drawable.ic_contact_profile)
                 .into(binding.ivContactDetailProfile)
         }

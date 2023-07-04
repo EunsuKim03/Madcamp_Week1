@@ -106,6 +106,7 @@ class GalleryAddActivity : AppCompatActivity() {
         // Done button listener
         done.setOnClickListener {
             if (imageUri != null) {
+                applicationContext.grantUriPermission(applicationContext.packageName, imageUri!!, Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 runBlocking { db.restaurantDao().insert(RestaurantEntity(nameVar, imageUri.toString(), phoneVar, addrVar)) }
                 finish()
             }
