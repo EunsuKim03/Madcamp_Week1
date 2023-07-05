@@ -10,7 +10,6 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.madcamp_week1.R
-import com.example.madcamp_week1.ui.contact.ContactDetailActivity
 
 class GalleryListAdapter(private val context: android.content.Context, private val p3list: ArrayList<Photo3>) :
     RecyclerView.Adapter<GalleryListAdapter.Holder>()

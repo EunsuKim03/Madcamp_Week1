@@ -5,20 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.madcamp_week1.databinding.FragmentContactBinding
-import com.example.madcamp_week1.db.ContactData
 import com.example.madcamp_week1.db.contactRoom.ContactDatabase
 import com.example.madcamp_week1.db.contactRoom.ContactEntity
 import kotlinx.coroutines.runBlocking
-import org.json.JSONArray
 
 //var contactDataList = ArrayList<ContactData>()
 class ContactFragment : Fragment() {

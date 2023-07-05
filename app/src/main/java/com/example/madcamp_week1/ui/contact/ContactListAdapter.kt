@@ -2,8 +2,6 @@ package com.example.madcamp_week1.ui.contact
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +10,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.madcamp_week1.R
-import com.example.madcamp_week1.db.ContactData
 import com.example.madcamp_week1.db.contactRoom.ContactEntity
 
 //class ContactListAdapter(private var list: MutableList<ContactData>): RecyclerView.Adapter<ContactListAdapter.ListItemViewHolder> () {

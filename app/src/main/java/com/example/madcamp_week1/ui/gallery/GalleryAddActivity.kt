@@ -14,10 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.room.Room
 import com.bumptech.glide.Glide
 import com.example.madcamp_week1.R
-import com.example.madcamp_week1.databinding.ActivityContactAddBinding
 import com.example.madcamp_week1.databinding.ActivityGalleryAddBinding
-import com.example.madcamp_week1.db.contactRoom.ContactDatabase
-import com.example.madcamp_week1.db.contactRoom.ContactEntity
 import com.example.madcamp_week1.db.restaurantRoom.RestaurantDatabase
 import com.example.madcamp_week1.db.restaurantRoom.RestaurantEntity
 import kotlinx.coroutines.runBlocking

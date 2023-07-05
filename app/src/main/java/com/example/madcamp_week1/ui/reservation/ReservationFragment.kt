@@ -4,18 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.madcamp_week1.databinding.FragmentReservationBinding
-import com.example.madcamp_week1.db.ContactData
-import com.example.madcamp_week1.db.ReservationData
 import com.example.madcamp_week1.db.reservationRoom.ReservationDatabase
 import com.example.madcamp_week1.db.reservationRoom.ReservationEntity
 import kotlinx.coroutines.runBlocking
-import org.json.JSONArray
 
 //var reservationDataList = ArrayList<ReservationData>()
 class ReservationFragment : Fragment() {
