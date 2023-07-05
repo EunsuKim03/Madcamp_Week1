@@ -77,6 +77,7 @@ class ReservationListAdapter(private var list: MutableList<ReservationEntity>): 
             // click event listener for detailed reservation page here
             itemView.setOnClickListener {
                 Intent(context, ReservationDetailActivity::class.java).apply {
+                    putExtra("rsid", item.rsid)
                     putExtra("restaurantName", item.restaurant.name)
                     putExtra("restaurantPhoto", item.restaurant.photoName)
                     putExtra("restaurantPhone", item.restaurant.phoneNumber)
