@@ -35,7 +35,7 @@ class ReservationCardListAdapter(private var list: MutableList<Pair<String, List
             item.second.forEach { arr.add(it) }
 
             rcv_reservation_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            rcv_reservation_list.setHasFixedSize(true)
+//            rcv_reservation_list.setHasFixedSize(true)
             rcv_reservation_list.addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
             rcv_reservation_list.adapter = ReservationListAdapter(arr)
 
