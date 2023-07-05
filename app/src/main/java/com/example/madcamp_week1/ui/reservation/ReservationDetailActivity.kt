@@ -2,7 +2,6 @@ package com.example.madcamp_week1.ui.reservation
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -14,14 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.bumptech.glide.Glide
 import com.example.madcamp_week1.R
-import com.example.madcamp_week1.databinding.ActivityContactDetailBinding
 import com.example.madcamp_week1.databinding.ActivityReservationDetailBinding
-import com.example.madcamp_week1.db.ContactData
-import com.example.madcamp_week1.db.ReservationData
 import com.example.madcamp_week1.db.contactRoom.ContactEntity
 import com.example.madcamp_week1.db.reservationRoom.ReservationDatabase
 import com.example.madcamp_week1.db.reservationRoom.ReservationEntity
-import com.example.madcamp_week1.db.restaurantRoom.RestaurantDatabase
 import com.example.madcamp_week1.ui.gallery.GalleryMapActivity
 import com.google.gson.Gson
 import kotlinx.coroutines.runBlocking

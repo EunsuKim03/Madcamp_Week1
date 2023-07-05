@@ -13,13 +13,10 @@ import android.widget.Toast
 import androidx.room.Room
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.databinding.ActivityContactDetailBinding
-import com.example.madcamp_week1.db.ContactData
 import com.example.madcamp_week1.db.contactRoom.ContactDatabase
 import com.example.madcamp_week1.db.contactRoom.ContactEntity
 import com.example.madcamp_week1.db.reservationRoom.ReservationDatabase
 import com.example.madcamp_week1.db.reservationRoom.ReservationEntity
-import com.example.madcamp_week1.db.restaurantRoom.RestaurantEntity
-import com.example.madcamp_week1.ui.gallery.GalleryMapActivity
 import kotlinx.coroutines.runBlocking
 
 class ContactDetailActivity : AppCompatActivity() {

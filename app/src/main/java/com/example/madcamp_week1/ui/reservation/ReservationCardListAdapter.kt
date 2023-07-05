@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week1.R
-import com.example.madcamp_week1.db.ReservationData
 import com.example.madcamp_week1.db.reservationRoom.ReservationEntity
 import com.google.android.material.card.MaterialCardView
 

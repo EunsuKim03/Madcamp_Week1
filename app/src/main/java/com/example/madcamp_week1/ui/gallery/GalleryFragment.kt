@@ -1,6 +1,5 @@
 package com.example.madcamp_week1.ui.gallery
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.madcamp_week1.databinding.FragmentGalleryBinding
-import com.example.madcamp_week1.db.RestaurantData
 import com.example.madcamp_week1.db.restaurantRoom.RestaurantDatabase
 import com.example.madcamp_week1.db.restaurantRoom.RestaurantEntity
 import kotlinx.coroutines.runBlocking
-import org.json.JSONArray
 
 
 //var restaurantDataList = ArrayList<RestaurantData>()

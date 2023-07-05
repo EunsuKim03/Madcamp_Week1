@@ -12,9 +12,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.madcamp_week1.R
-import com.example.madcamp_week1.db.ReservationData
 import com.example.madcamp_week1.db.reservationRoom.ReservationEntity
-import com.example.madcamp_week1.ui.contact.ContactDetailActivity
 import com.google.gson.Gson
 
 //class ReservationListAdapter(private var list: MutableList<ReservationData>): RecyclerView.Adapter<ReservationListAdapter.ListItemViewHolder>() {

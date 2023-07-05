@@ -4,8 +4,6 @@ import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.Gravity
 import android.view.MenuItem
 import android.widget.LinearLayout
@@ -14,7 +12,6 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.room.Room
 import com.example.madcamp_week1.R
-import com.example.madcamp_week1.databinding.ActivityGalleryAddBinding
 import com.example.madcamp_week1.databinding.ActivityReservationAddBinding
 import com.example.madcamp_week1.db.contactRoom.ContactDatabase
 import com.example.madcamp_week1.db.contactRoom.ContactEntity
