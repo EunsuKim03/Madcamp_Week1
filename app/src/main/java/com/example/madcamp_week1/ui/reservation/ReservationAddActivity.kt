@@ -169,8 +169,14 @@ class ReservationAddActivity : AppCompatActivity() {
                         val textView = TextView(applicationContext)
                         textView.setText(txt)
                         textView.textSize = 12f
-                        textView.setTextColor(Color.BLACK)
+//                        textView.setTextColor(Color.BLACK)
+                        textView.setTextColor(Color.parseColor("#E45477"))
+                        textView.setBackgroundResource(R.drawable.circular_dynamic)
+//                        textView.setBackground(R.drawable.circular)
                         textView.id = j
+
+                        textView.setPadding(16, 8, 16, 8)
+
 
                         val param : LinearLayout.LayoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
                         param.marginStart = 8
