@@ -73,6 +73,7 @@ class ReservationListAdapter(private var list: MutableList<ReservationEntity>): 
 //            iv_restaurant.setImageResource(context.resources.getIdentifier(item.restaurant!!.photoName, "drawable", context.packageName))
             Glide.with(context)
                 .load(Uri.parse(item.restaurant!!.photoName))
+                .centerCrop()
                 .into(iv_restaurant)
             tv_restaurant_name.text = item.restaurant!!.name
 
