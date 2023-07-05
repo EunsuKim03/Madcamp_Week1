@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week1.R
@@ -36,6 +37,7 @@ class ReservationCardListAdapter(private var list: MutableList<Pair<String, List
 
             rcv_reservation_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             rcv_reservation_list.setHasFixedSize(true)
+            rcv_reservation_list.addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
             rcv_reservation_list.adapter = ReservationListAdapter(arr)
 
             itemView.setOnClickListener {

@@ -7,7 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.bumptech.glide.Glide
@@ -85,6 +87,7 @@ class ReservationDetailActivity : AppCompatActivity() {
 
         binding.rcvRsvDetailFriends.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rcvRsvDetailFriends.setHasFixedSize(true)
+        binding.rcvRsvDetailFriends.addItemDecoration(DividerItemDecoration(this, LinearLayout.VERTICAL))
         binding.rcvRsvDetailFriends.adapter = ReservationFriendsListAdapter(list)
 
         binding.tvRsvDetailRestaurantAddr.setOnClickListener {

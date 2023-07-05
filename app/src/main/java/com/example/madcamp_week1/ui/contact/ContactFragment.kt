@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.madcamp_week1.databinding.FragmentContactBinding
@@ -109,6 +110,7 @@ class ContactFragment : Fragment() {
             binding.rcvContactList.setHasFixedSize(true)
 //        binding.rcvContactList.adapter = ContactListAdapter(contactDataList)
 
+            binding.rcvContactList.addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
             binding.rcvContactList.adapter = ContactListAdapter(contactList)
         }
 
