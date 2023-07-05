@@ -109,8 +109,12 @@ class ContactFragment : Fragment() {
             binding.rcvContactList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             binding.rcvContactList.setHasFixedSize(true)
 //        binding.rcvContactList.adapter = ContactListAdapter(contactDataList)
-
+            val decoCount = binding.rcvContactList.itemDecorationCount
+            if(decoCount != 0) {
+                binding.rcvContactList.removeItemDecorationAt(decoCount - 1)
+            }
             binding.rcvContactList.addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
+
             binding.rcvContactList.adapter = ContactListAdapter(contactList)
         }
 
