@@ -115,3 +115,36 @@ Delete reservation: rsid
 >> application의 모든 activity에서 해당 Uri에 접근이 가능할 것으로 생각함.   
 > 다행히 해당 함수 추가 이후에 이미지 uri 접근이 deny되는 문제는 사라짐.   
 >
+
+Android Room(DB) 문제 
+--------------------
+> 내부저장소에 데이터를 저장하는 방식으로는 Android Room을 사용 했음.
+> 다른 관계형 DB처럼 table을 만들고 쿼리 문을 함수로 만들어 데이터를 접근하는 방식임.
+> 처음 써보는 방식이라 여러 문제가 있었음.
+> 
+> Android Room의 entity에는 기본적으로 Primitive type만 허용하며, ArrayList는 허용되지 않음.
+> Reservation의 경우 Restaurant과 Contact의 data를 가져와야 하기 때문에 테이블이 생각보다 복잡해짐.
+> 
+> 처음에 Contact를 ArrayList로 저장했다가 빌드 에러가 나서 List로 고쳐 줌.
+> List로 넘기는 경우, putExtra로 넘길 수 없기 때문에 (putExtra는 primitive나 serializable한 데이터만 허용 함) json도 활용 함.
+> ContactEntity 객체의 리스트를 gson 라이브러리를 활용해 json string 으로 넘겨 준 뒤, 받는 activity에서 다시 파싱해서 정보를 받아오는 식으로 처리 했음.
+> 
+> 또한 app.gradle 설정이 복잡해 처음에는 블로그 등을 참고해 의존성을 추가하다가 빌드 에러가 생겨 공식 문서를 참고해서 해결 했음.
+> 
+> 우리 프로그램은 특성상 동시에 DB의 데이터를 처리 할 일은 없기 때문에 처음에는 메인 스레드로 처리 하려 했음.
+> 그러나 Android Room은 main thread에서 사용하면 lock 될 위험이 있기 때문에 허용 되지 않음.
+> 따라서 coroutine을 사용해서 해결 함 (비동기적으로 처리 함)
+> 그냥 coroutine 함수를 실행하면 에러가 생겨서 runBlocking을 통해 다시 동기적으로 처리해주었음.
+
+
+Recyclerview 안뜨던 버그
+------------------------
+> ReservationDetailPage에서 식당 사진이 나오고, 식당 정보들을 TextView로 보여준 다음 일행들을 recyclerview로 화면에 표현하려 함.
+> 문제는 실행하면 어떤 reservation에서는 사진만 나오고, 어떤 reservation은 사진과 정보까지는 나오는 등 제각각이였음.
+> 공통적으로 recyclerview는 나오지 않았음.
+> 
+> 식당 정보가 잘리는 것은 식당 사진의 크기가 제각각이라 잘리는 것이였음.
+> 사진의 크기를 고정사이즈로 제한을 두는 것으로 해결함.
+> 
+> Recyclerview를 보이게 하기 위해 전체 레이아웃을 ScrollView로 감싼 뒤, LinearLayout으로 한 번 감싸고, 그 안에 식당 사진과 정보를 넣음. 그 다음 RelativeLayout을 만들고 그 안에 RecyclerView를 넣는 것으로 문제를 해결 할 수 있었음.
+> Recyclerview의 특성 때문에 화면에 나오지 않았던 것 같음.
