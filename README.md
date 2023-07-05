@@ -28,7 +28,7 @@ Madcamp_Week1
 > - 사진 추가 버튼: 우측 상단 Toolbar에 위치하며 터치시 GalleryAddPage가 실행됨.
 > - 최초 실행시 아무 사진이 없으며 사진 추가 버튼을 통해 식당 정보를 사용자가 입력해서 추가해야 함.
 >   
-> **DetailPage***: 사진 원본 및 나머지 식당 정보를 표시함.
+> **DetailPage**: 사진 원본 및 나머지 식당 정보를 표시함.
 > - 주소 터치: 해당 주소와 식당 이름을 매개변수로 MapPage를 실행함.
 > - 전화 번호 터치: 전화 앱으로 해당 전화 번호가 입력되어 연결됨.
 > - 사진 삭제 버튼: 우측 상단 Toolbar에 위치하며 터치 시, 해당 식당 정보를 삭제하고 MainActivity로 돌아감.
@@ -46,34 +46,26 @@ Madcamp_Week1
 
 **Tab3: 자유 주제**
 ------------
-
-
-
-
-.   
-.   
-.   
-.   
-.   
-
-개발 노트
------------
-
-Day1
------
-
-Kotlin 문법 공부 및 xml 코드 이해
-Gallery Recycler View 구현 시도
-
-Day2
-------
-
-Gallery Recycler View 구현:
-> ListItem 하나에 3개의 사진이 들어가도록 했으며 이를 나타내는 class: Photo3를 만듦   
-> Photo3 class를 이용하여 GalleryListAdapter 구현   
+> **MainActivity**: Recyclerview 안에 날짜 별 약속들이 CardView 형태로 들어있음.
+> - CardView들은 날짜 순으로 정렬되어 있음.
+> - CardView를 클릭하면 접힌 것이 열리면서 해당 날짜에 있는 약속 목록이 보임.
+> - 약속 목록에서는 식당 사진의 썸네일과 식당 이름, 일행의 이름들이 보인다. 
+> - 일행이 네 명 이상일 경우, 두 명까지만 표시하고 나머지는 외 n - 2 명으로 표현된다.
+> - 약속 item을 하나 클릭하면 DetailPage가 실행 됨.
+> - 최초 실행 시 아무 약속이 없고 우상단의 추가 버튼을 눌러 ReservationAddPage로 넘어가 연락처와 갈 식당을 선택해서 추가해야 함.
 > 
-  
-  
-Day3
------
+> **DetailPage**: 식당의 사진과 식당의 정보 (이름, 위치, 전화번호)를 보여주고 같이 가는 일행의 목록이 recyclerview에 들어있음.
+> - 지도 버튼을 클릭하면 Gallery의 DetailPage와 같은 방식으로 지도를 띄운다.
+> - 식당의 전화 버튼을 클릭하면 Contact의 DetailPage와 같이 전화 앱으로 넘어감.
+> - 일행의 목록은 Contact의 MainActivity와 같은 방식으로 보여주고, 클릭하면 Contact의 DetailPage로 넘어간다.
+> - 우상단의 삭제 버튼을 누르면 삭제하고 다시 Reservation의 MainActivity로 돌아오게 된다.
+> 
+> **ReservationAddPage**: 날짜, 식당, 같이 갈 일행을 고르는 화면이 나옴
+> - 식당과 일행을 고르지 않으면 reservation을 만들 수 없음 (날짜는 기본적으로 현재 날짜를 default 값으로 가짐)
+> - 캘린더를 조작하는 것으로 약속 날짜를 정할 수 있음.
+> - 식당 선택과 일행 선택은 AlertDialogue를 통해 선택창이 나옴.
+> - EditText의 restaurant를 누르면 현재 Gallery에 등록해둔 식당의 목록이 나옴 (하나만 선택 가능. radiobutton)
+> - Add friends 버튼을 누르면 일행을 추가 할 수 있음 (여러 명 선택 가능. checkbox)
+> - Dialogue에서 일행을 다 고르면 아래에 같이 가는 일행의 이름들이 TextView로 표현 됨.
+> - 식당과 일행이 비어있지 않다면 Done 버튼이 파란색으로 활성화 되고 reservation을 추가 할 수 있음.
 
