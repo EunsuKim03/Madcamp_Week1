@@ -23,6 +23,8 @@ import com.example.madcamp_week1.db.reservationRoom.ReservationEntity
 import com.example.madcamp_week1.db.restaurantRoom.RestaurantDatabase
 import com.example.madcamp_week1.db.restaurantRoom.RestaurantEntity
 import kotlinx.coroutines.runBlocking
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class ReservationAddActivity : AppCompatActivity() {
     private lateinit var binding : ActivityReservationAddBinding
@@ -77,7 +79,11 @@ class ReservationAddActivity : AppCompatActivity() {
         var restaurantVar: String = ""
 
         // date 저장
+        val dateInputPattern = DateTimeFormatter.ofPattern("yyyy/M/d")
+        val dateOutputPattern = DateTimeFormatter.ofPattern("yyyy/MM/dd")
         dateVar = date.year.toString()+"/"+(date.month+1).toString()+"/"+date.dayOfMonth.toString()
+        var date_temp = LocalDate.parse(dateVar, dateInputPattern)
+        dateVar = date_temp.format(dateOutputPattern)
 
         val restaurantList = ArrayList<RestaurantEntity>()
         runBlocking {
@@ -95,8 +101,9 @@ class ReservationAddActivity : AppCompatActivity() {
         }
 
         date.setOnDateChangedListener { date, year, month, dayOfMonth ->
-            dateVar =
-                date.year.toString() + "/" + (date.month + 1).toString() + "/" + date.dayOfMonth.toString()
+            dateVar = date.year.toString() + "/" + (date.month + 1).toString() + "/" + date.dayOfMonth.toString()
+            date_temp = LocalDate.parse(dateVar, dateInputPattern)
+            dateVar = date_temp.format(dateOutputPattern)
             if (restaurantOn && peopleOn) {
                 done.setBackgroundColor(Color.parseColor("#6D7EFD"))
             } else {
@@ -139,15 +146,23 @@ class ReservationAddActivity : AppCompatActivity() {
                     container.removeView(findViewById(j))
                     textViewArray.remove(j)
                 }
+                selectedContactBooleanArrayList[j] = false
             }
+            peopleOn = false
+            done.setBackgroundColor(Color.parseColor("#D0D0D0"))
+
+            var tempBooleanArray = selectedContactBooleanArrayList.toBooleanArray()
 
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Select friends")
-            builder.setMultiChoiceItems(cNameList.toTypedArray(), selectedContactBooleanArrayList.toBooleanArray()) { dialog_friends, which, isChecked ->
-                selectedContactBooleanArrayList[which] = isChecked
+            builder.setMultiChoiceItems(cNameList.toTypedArray(), tempBooleanArray) { dialog_friends, which, isChecked ->
+                tempBooleanArray[which] = isChecked
             }
 
             builder.setPositiveButton("DONE") { dialogInterface, i ->
+                for(j in tempBooleanArray.indices) {
+                    selectedContactBooleanArrayList[j] = tempBooleanArray[j]
+                }
                 for(j in selectedContactBooleanArrayList.indices) {
                     if(selectedContactBooleanArrayList[j]) {
                         val txt = cNameList[j].split(" ")[0]
@@ -168,7 +183,8 @@ class ReservationAddActivity : AppCompatActivity() {
 
                         textViewArray.add(textView.id)
                         container.addView(textView)
-                        peopleOn = true
+
+                        peopleOn = peopleOn || selectedContactBooleanArrayList[j]
                         if (restaurantOn && peopleOn) {
                             done.setBackgroundColor(Color.parseColor("#6D7EFD"))
                         } else {
