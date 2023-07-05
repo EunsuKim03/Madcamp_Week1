@@ -69,3 +69,6 @@ Madcamp_Week1
 > - Dialogue에서 일행을 다 고르면 아래에 같이 가는 일행의 이름들이 TextView로 표현 됨.
 > - 식당과 일행이 비어있지 않다면 Done 버튼이 파란색으로 활성화 되고 reservation을 추가 할 수 있음.
 
+Trouble Shooting
+------------------
+
