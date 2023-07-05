@@ -16,6 +16,9 @@ import com.example.madcamp_week1.databinding.ActivityContactDetailBinding
 import com.example.madcamp_week1.db.ContactData
 import com.example.madcamp_week1.db.contactRoom.ContactDatabase
 import com.example.madcamp_week1.db.contactRoom.ContactEntity
+import com.example.madcamp_week1.db.reservationRoom.ReservationDatabase
+import com.example.madcamp_week1.db.reservationRoom.ReservationEntity
+import com.example.madcamp_week1.db.restaurantRoom.RestaurantEntity
 import com.example.madcamp_week1.ui.gallery.GalleryMapActivity
 import kotlinx.coroutines.runBlocking
 
@@ -99,15 +102,60 @@ class ContactDetailActivity : AppCompatActivity() {
                 return true
             }
             R.id.toolbar_delete -> {
-                val temp: ContactEntity
-                if(cid != -1) {
-                    runBlocking { temp = db.contactDao().getById(cid) }
-                    runBlocking { db.contactDao().delete(temp) }
+//                val temp: ContactEntity
+//                if(cid != -1) {
+//                    runBlocking { temp = db.contactDao().getById(cid) }
+//                    runBlocking { db.contactDao().delete(temp) }
+//                    Toast.makeText(this, "Successfully deleted!", Toast.LENGTH_SHORT).show()
+//                    finish()
+//                }
+                if (deleteContact(cid)) {
                     Toast.makeText(this, "Successfully deleted!", Toast.LENGTH_SHORT).show()
                     finish()
+                } else {
+                    Toast.makeText(this, "Delete failed!", Toast.LENGTH_SHORT).show()
+                    finish()
                 }
+                return true
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteContact(cid: Int): Boolean {
+        if (cid != -1) {
+            var rsDb = Room.databaseBuilder(
+                applicationContext,
+                ReservationDatabase::class.java, "reservationDB"
+            ).build()
+
+            // delete reservation
+            val resTemp: List<ReservationEntity>
+            runBlocking { resTemp = rsDb.reservationDao().getAll() }
+            val deleteRsList = resTemp.filter { it.friends!!.any{ it.cid == cid } }.map{ it.rsid }
+            for (rsid in deleteRsList) {
+                var temp: ReservationEntity
+                if(rsid != -1) {
+                    runBlocking { temp = rsDb.reservationDao().getById(rsid) }
+                    val newFriends = temp.friends!!.filterNot { it.cid == cid }
+                    val newRs = ReservationEntity(temp.restaurant, newFriends, temp.date)
+                    if (newFriends.isEmpty()) {
+                        // If friends list becomes empty, delete that reservation
+                        runBlocking { rsDb.reservationDao().delete(temp) }
+                    } else {
+                        // otherwise, just delete that item
+                        runBlocking { rsDb.reservationDao().delete(temp) }
+                        runBlocking { rsDb.reservationDao().insert(newRs) }
+                    }
+                }
+            }
+
+            // delete contact
+            val temp: ContactEntity
+            runBlocking { temp = db.contactDao().getById(cid) }
+            runBlocking { db.contactDao().delete(temp)}
+            return true
+        }
+        return false
     }
 }

@@ -12,6 +12,8 @@ import androidx.room.Room
 import com.bumptech.glide.Glide
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.databinding.ActivityGalleryDetailBinding
+import com.example.madcamp_week1.db.reservationRoom.ReservationDatabase
+import com.example.madcamp_week1.db.reservationRoom.ReservationEntity
 import com.example.madcamp_week1.db.restaurantRoom.RestaurantDatabase
 import com.example.madcamp_week1.db.restaurantRoom.RestaurantEntity
 import kotlinx.coroutines.runBlocking
@@ -106,15 +108,53 @@ class GalleryDetailActivity : AppCompatActivity(){
                 return true
             }
             R.id.toolbar_delete -> {
-                val temp: RestaurantEntity
-                if(rtid != -1) {
-                    runBlocking { temp = db.restaurantDao().getById(rtid) }
-                    runBlocking { db.restaurantDao().delete(temp)}
+//                val temp: RestaurantEntity
+//                if(rtid != -1) {
+//                    runBlocking { temp = db.restaurantDao().getById(rtid) }
+//                    runBlocking { db.restaurantDao().delete(temp)}
+//                    Toast.makeText(this, "Successfully deleted!", Toast.LENGTH_SHORT).show()
+//                    finish()
+//                }
+
+                if (deleteRestaurant(rtid)) {
                     Toast.makeText(this, "Successfully deleted!", Toast.LENGTH_SHORT).show()
                     finish()
+                } else {
+                    Toast.makeText(this, "Delete failed!", Toast.LENGTH_SHORT).show()
+                    finish()
                 }
+                return true
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteRestaurant(rtid: Int): Boolean {
+        if (rtid != -1) {
+            var rsDb = Room.databaseBuilder(
+                applicationContext,
+                ReservationDatabase::class.java, "reservationDB"
+            ).build()
+
+            // delete reservation
+            val resTemp: List<ReservationEntity>
+            runBlocking { resTemp = rsDb.reservationDao().getAll() }
+            val deleteRsList = resTemp.filter { it.restaurant?.rtid == rtid }.map{ it.rsid }
+            for (rsid in deleteRsList) {
+                val temp: ReservationEntity
+                if(rsid != -1) {
+                    runBlocking { temp = rsDb.reservationDao().getById(rsid) }
+                    runBlocking { rsDb.reservationDao().delete(temp) }
+
+                }
+            }
+
+            // delete restaurant
+            val temp: RestaurantEntity
+            runBlocking { temp = db.restaurantDao().getById(rtid) }
+            runBlocking { db.restaurantDao().delete(temp)}
+            return true
+        }
+        return false
     }
 }
