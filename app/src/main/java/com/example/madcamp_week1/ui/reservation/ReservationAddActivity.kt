@@ -33,6 +33,8 @@ class ReservationAddActivity : AppCompatActivity() {
     lateinit var dialog_restaurant: AlertDialog
     lateinit var dialog_friends: AlertDialog
 
+    var restaurantOn = false
+    var peopleOn = false
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,20 +95,33 @@ class ReservationAddActivity : AppCompatActivity() {
             }
         }
 
-        date.setOnDateChangedListener({ date, year, month, dayOfMonth -> dateVar = date.year.toString()+"/"+(date.month+1).toString()+"/"+date.dayOfMonth.toString()})
+        date.setOnDateChangedListener { date, year, month, dayOfMonth ->
+            dateVar =
+                date.year.toString() + "/" + (date.month + 1).toString() + "/" + date.dayOfMonth.toString()
+            if (restaurantOn && peopleOn) {
+                done.setBackgroundColor(Color.parseColor("#6D7EFD"))
+            } else {
+                done.setBackgroundColor(Color.parseColor("#D0D0D0"))
+            }
+        }
 
         restaurant.setOnClickListener {
             val rNameList: Array<String> = restaurantList.map { it.name }.toTypedArray()
 
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Select restaurant")
-            builder.setSingleChoiceItems(rNameList, -1, {_, which ->
+            builder.setSingleChoiceItems(rNameList, -1) { _, which ->
                 restaurant.setText(rNameList[which])
 
                 restaurantVar = rNameList[which]
-
+                restaurantOn = true
+                if (restaurantOn && peopleOn) {
+                    done.setBackgroundColor(Color.parseColor("#6D7EFD"))
+                } else {
+                    done.setBackgroundColor(Color.parseColor("#D0D0D0"))
+                }
                 dialog_restaurant.dismiss()
-            })
+            }
 
             dialog_restaurant = builder.create()
             dialog_restaurant.show()
@@ -154,6 +169,12 @@ class ReservationAddActivity : AppCompatActivity() {
 
                         textViewArray.add(textView.id)
                         container.addView(textView)
+                        peopleOn = true
+                        if (restaurantOn && peopleOn) {
+                            done.setBackgroundColor(Color.parseColor("#6D7EFD"))
+                        } else {
+                            done.setBackgroundColor(Color.parseColor("#D0D0D0"))
+                        }
                     }
 
                 }
@@ -167,19 +188,20 @@ class ReservationAddActivity : AppCompatActivity() {
 
         // check the condition and validate the button
 
-
         done.setOnClickListener {
-            val selectedRestaurant: RestaurantEntity
-            runBlocking { selectedRestaurant = restaurant_db.restaurantDao().getByName(restaurantVar) }
-            var selectedContacts = ArrayList<ContactEntity>()
-            for(j in selectedContactBooleanArrayList.indices) {
-                if(selectedContactBooleanArrayList[j]) {
-                    runBlocking { selectedContacts.add(contact_db.contactDao().getById(cIdList[j])) }
+            if (restaurantOn && peopleOn) {
+                val selectedRestaurant: RestaurantEntity
+                runBlocking { selectedRestaurant = restaurant_db.restaurantDao().getByName(restaurantVar) }
+                var selectedContacts = ArrayList<ContactEntity>()
+                for(j in selectedContactBooleanArrayList.indices) {
+                    if(selectedContactBooleanArrayList[j]) {
+                        runBlocking { selectedContacts.add(contact_db.contactDao().getById(cIdList[j])) }
+                    }
                 }
-            }
 
-            runBlocking { reservation_db.reservationDao().insert(ReservationEntity(selectedRestaurant, selectedContacts.toList(), dateVar)) }
-            finish()
+                runBlocking { reservation_db.reservationDao().insert(ReservationEntity(selectedRestaurant, selectedContacts.toList(), dateVar)) }
+                finish()
+            }
         }
 
         // Cancel button listener
