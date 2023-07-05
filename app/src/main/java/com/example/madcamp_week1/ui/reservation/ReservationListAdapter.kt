@@ -1,6 +1,7 @@
 package com.example.madcamp_week1.ui.reservation
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -31,11 +32,12 @@ class ReservationListAdapter(private var list: MutableList<ReservationEntity>): 
                     val textView = TextView(context)
                     textView.setText(item.friends[i].name)
                     textView.textSize = 12f
+                    textView.setTextColor(Color.parseColor("#A3A3A3"))
                     textView.id = i
 
                     val param : LinearLayout.LayoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-                    param.marginStart = 8
-                    param.marginEnd = 8
+                    param.marginStart = 4
+                    param.marginEnd = 4
 
                     textView.layoutParams = param
                     ll_friends_list.addView(textView)
@@ -43,6 +45,7 @@ class ReservationListAdapter(private var list: MutableList<ReservationEntity>): 
                 val textView: TextView = TextView(context)
                 textView.setText("외 ${item.friends.size - 2} 명")
                 textView.textSize = 12f
+                textView.setTextColor(Color.parseColor("#A3A3A3"))
 
                 val param : LinearLayout.LayoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
                 param.marginStart = 8
@@ -55,6 +58,7 @@ class ReservationListAdapter(private var list: MutableList<ReservationEntity>): 
                     val textView: TextView = TextView(context)
                     textView.setText(item.friends[i].name)
                     textView.textSize = 12f
+                    textView.setTextColor(Color.parseColor("#A3A3A3"))
                     textView.id = i
 
                     val param : LinearLayout.LayoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)

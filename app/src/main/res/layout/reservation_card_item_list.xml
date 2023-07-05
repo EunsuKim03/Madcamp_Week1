@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         app:strokeWidth="1dp"
         app:cardCornerRadius="3dp"
-        app:strokeColor="@color/black" >
+        app:strokeColor="#939393" >
 
         <TextView
             android:id="@+id/tv_rsv_card_date"
@@ -44,6 +44,7 @@
         android:visibility="gone"
         android:background="#D8D7D7">
         <androidx.recyclerview.widget.RecyclerView
+            android:background="@color/white"
             android:id="@+id/rcv_reservation_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

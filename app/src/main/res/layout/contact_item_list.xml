@@ -27,7 +27,8 @@
             app:layout_constraintEnd_toStartOf="@id/ll_contact_tvs"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
             android:src="@drawable/ic_contact_profile"
             />
         
@@ -39,22 +40,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="4dp"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/tv_contactName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="#000000"
-                android:layout_marginBottom="4dp"/>
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"/>
 
             <TextView
                 android:id="@+id/tv_contactPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="8sp"
-                android:textColor="#D3D3D3"
-                android:layout_marginTop="4dp"/>
+                android:textSize="10sp"
+                android:textColor="#A3A3A3"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"/>
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
