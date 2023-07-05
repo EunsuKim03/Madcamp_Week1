@@ -32,7 +32,9 @@ class ReservationListAdapter(private var list: MutableList<ReservationEntity>): 
                     val textView = TextView(context)
                     textView.setText(item.friends[i].name)
                     textView.textSize = 12f
-                    textView.setTextColor(Color.parseColor("#A3A3A3"))
+                    textView.setTextColor(Color.parseColor("#E45477"))
+                    textView.setBackgroundResource(R.drawable.circular_dynamic)
+                    textView.setPadding(16, 8, 16, 8)
                     textView.id = i
 
                     val param : LinearLayout.LayoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
@@ -45,7 +47,9 @@ class ReservationListAdapter(private var list: MutableList<ReservationEntity>): 
                 val textView: TextView = TextView(context)
                 textView.setText("외 ${item.friends.size - 2} 명")
                 textView.textSize = 12f
-                textView.setTextColor(Color.parseColor("#A3A3A3"))
+                textView.setTextColor(Color.parseColor("#E45477"))
+                textView.setBackgroundResource(R.drawable.circular_dynamic)
+                textView.setPadding(16, 8, 16, 8)
 
                 val param : LinearLayout.LayoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
                 param.marginStart = 8
@@ -58,7 +62,9 @@ class ReservationListAdapter(private var list: MutableList<ReservationEntity>): 
                     val textView: TextView = TextView(context)
                     textView.setText(item.friends[i].name)
                     textView.textSize = 12f
-                    textView.setTextColor(Color.parseColor("#A3A3A3"))
+                    textView.setTextColor(Color.parseColor("#E45477"))
+                    textView.setBackgroundResource(R.drawable.circular_dynamic)
+                    textView.setPadding(16, 8, 16, 8)
                     textView.id = i
 
                     val param : LinearLayout.LayoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)

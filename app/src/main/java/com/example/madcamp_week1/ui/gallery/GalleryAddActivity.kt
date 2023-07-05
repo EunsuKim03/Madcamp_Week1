@@ -25,6 +25,9 @@ import kotlinx.coroutines.runBlocking
 class GalleryAddActivity : AppCompatActivity() {
     private lateinit var binding : ActivityGalleryAddBinding
     private var imageUri: Uri? = null
+
+    var valid = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gallery_add)
@@ -60,8 +63,10 @@ class GalleryAddActivity : AppCompatActivity() {
                 nameVar = name.text.toString()
                 if ((nameVar != "") && (phoneVar != "") && (addrVar != "")) {
                     done.setBackgroundColor(Color.parseColor("#6D7EFD"))
+                    valid = true
                 } else {
                     done.setBackgroundColor(Color.parseColor("#D0D0D0"))
+                    valid = false
                 }
             }
 
@@ -78,8 +83,10 @@ class GalleryAddActivity : AppCompatActivity() {
                 addrVar = addr.text.toString()
                 if ((nameVar != "") && (phoneVar != "") && (addrVar != "")) {
                     done.setBackgroundColor(Color.parseColor("#6D7EFD"))
+                    valid = true
                 } else {
                     done.setBackgroundColor(Color.parseColor("#D0D0D0"))
+                    valid = false
                 }
             }
 
@@ -98,8 +105,10 @@ class GalleryAddActivity : AppCompatActivity() {
                 phoneVar = phone.text.toString()
                 if ((nameVar != "") && (phoneVar != "") && (addrVar != "")) {
                     done.setBackgroundColor(Color.parseColor("#6D7EFD"))
+                    valid = true
                 } else {
                     done.setBackgroundColor(Color.parseColor("#D0D0D0"))
+                    valid = false
                 }
             }
 
@@ -114,7 +123,7 @@ class GalleryAddActivity : AppCompatActivity() {
 
         // Done button listener
         done.setOnClickListener {
-            if (imageUri != null) {
+            if (imageUri != null && valid) {
                 applicationContext.grantUriPermission(applicationContext.packageName, imageUri!!, Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 runBlocking { db.restaurantDao().insert(RestaurantEntity(nameVar, imageUri.toString(), phoneVar, addrVar)) }
                 finish()
