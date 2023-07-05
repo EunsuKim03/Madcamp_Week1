@@ -32,6 +32,7 @@ class ReservationFriendsListAdapter(private var list: MutableList<ContactEntity>
             } else {
                 Glide.with(context)
                     .load(Uri.parse(item.photoName))
+                    .circleCrop()
                     .into(iv_rsv_detail_friend_img)
             }
             itemView.setOnClickListener {
