@@ -70,5 +70,48 @@ Madcamp_Week1
 > - 식당과 일행이 비어있지 않다면 Done 버튼이 파란색으로 활성화 되고 reservation을 추가 할 수 있음.
 
 Trouble Shooting
-------------------
+=================
 
+연락처/식당 데이터 삭제 관리 (DeleteBehavior)
+----------------------------------------------
+> Tab3의 예약 정보는 Tab1과 Tab2의 연락처, 식당 데이터와 연관되어 있다.   
+> 따라서 각각의 데이터베이스 내의 존재 여부는 각 데이터에 영향을 줄 수 있다.   
+> 예를 들어, 예약 정보가 7월 6일에 식당 X에 사람 A, B의 예약이 있는 상황에서,   
+> - Tab1에서 사람 A 또는 B를 삭제 한다면? Tab2에서 식당 X를 삭제한다면?
+>   
+> 구현 방식에 따라 Nullpointer로 문제가 생기거나, 원하는 동작이 되지 않을 수 있다.   
+> 이를 방지하기 위해 아래와 같이 삭제 동작을 정의하였다.   
+<pre><code>Delete contact: cid
+	-> Walk Reservation 
+		-> If a reservation has cid in friends list 
+			-> Delete it from friends list
+				-> After delete, if the friends list becomes empty
+					-> Delete that reservation
+	-> Delete contact
+
+Delete restaurant: rtid
+	-> Walk Reservation
+		-> If a reservation's restaurant.rtid == rtid
+			-> Delete that rerservation
+	-> Delete restaurant
+
+Delete reservation: rsid
+	-> Delete reservation
+</code></pre>
+
+이미지 권한 문제
+------------------
+> 이미지 표시하기 위해 Glide를 사용하였으며, Local 저장소에서 Uri를 가져와서 출력하도록 하였다.   
+> Android 버전에 따라 SDK33 이상에서는 READ_MEDIA_IMAGES, 33 미만에서는 READ_EXTERNAL_STORAGE 권한을   
+> 정상적으로 설정하고도 다음과 같은 문제가 발생했다.   
+> - AddPage에서 연락처 사진을 추가 -> MainFragment에서 정상적으로 이미지가 출력됨 -> DetailPage에서 이미지가 표시되지 않음   
+>   
+> Logcat를 확인한 결과, 권한을 설정하지 않은 문제로 발생하는 Exception과 조금 다른 Exception이 발생하는 것을 발견했으며,   
+> 구글링하여 다음을 발견: 로컬 요소의 Uri마다 권한이 존재하며, 권한을 가지고 있지 않은 activity에서 접근 시 이를 막는다.   
+> 이를 해결하기 위해 아래의 방법을 시도함. (작동 방식을 확실하게는 모르겠음)   
+> - applicationContext.grantUriPermission(applicationContext.packageName, ///URI///, Intent.FLAG_GRANT_READ_URI_PERMISSION)	
+>> 위 함수는 두 번째 매개 변수인 Uri에 대한 권환을 첫 번째  argument에게 넘겨준다.(grant? 승인?)   
+>> 이 때, 첫 번째 인자에 이 application의 pakageName을 넣어주면,   
+>> application의 모든 activity에서 해당 Uri에 접근이 가능할 것으로 생각함.   
+> 다행히 해당 함수 추가 이후에 이미지 uri 접근이 deny되는 문제는 사라짐.   
+>
