@@ -107,11 +107,14 @@ Delete reservation: rsid
 > - AddPage에서 연락처 사진을 추가 -> MainFragment에서 정상적으로 이미지가 출력됨 -> DetailPage에서 이미지가 표시되지 않음   
 >   
 > Logcat를 확인한 결과, 권한을 설정하지 않은 문제로 발생하는 Exception과 조금 다른 Exception이 발생하는 것을 발견했으며,   
-> 구글링하여 다음을 발견: 로컬 요소의 Uri마다 권한이 존재하며, 권한을 가지고 있지 않은 activity에서 접근 시 이를 막는다.   
-> 이를 해결하기 위해 아래의 방법을 시도함. (작동 방식을 확실하게는 모르겠음)   
-> - applicationContext.grantUriPermission(applicationContext.packageName, ///URI///, Intent.FLAG_GRANT_READ_URI_PERMISSION)	
->> 위 함수는 두 번째 매개 변수인 Uri에 대한 권환을 첫 번째  argument에게 넘겨준다.(grant? 승인?)   
->> 이 때, 첫 번째 인자에 이 application의 pakageName을 넣어주면,   
->> application의 모든 activity에서 해당 Uri에 접근이 가능할 것으로 생각함.   
+> 구글링하여 다음을 발견:   
+> - 로컬 요소의 Uri마다 권한이 존재하며, 권한을 가지고 있지 않은 activity에서 접근 시 이를 막는다.
+>
+> 이를 해결하기 위해 아래의 방법을 시도함. (작동 방식을 확실하게는 모르겠음)
+<pre><code>applicationContext.grantUriPermission(applicationContext.packageName, ///URI///, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+</code></pre>
+> 위 함수는 두 번째 매개 변수인 Uri에 대한 권환을 첫 번째  argument에게 넘겨준다.   
+> - 이 때, 첫 번째 인자에 이 application의 pakageName을 넣어주면,   
+> - application의 모든 activity에서 해당 Uri에 접근이 가능할 것으로 생각함.   
 > 다행히 해당 함수 추가 이후에 이미지 uri 접근이 deny되는 문제는 사라짐.   
 >
