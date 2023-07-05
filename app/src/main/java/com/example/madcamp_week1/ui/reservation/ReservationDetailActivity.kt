@@ -7,7 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.room.Room
 import com.bumptech.glide.Glide
 import com.example.madcamp_week1.R
 import com.example.madcamp_week1.databinding.ActivityContactDetailBinding
@@ -15,14 +17,20 @@ import com.example.madcamp_week1.databinding.ActivityReservationDetailBinding
 import com.example.madcamp_week1.db.ContactData
 import com.example.madcamp_week1.db.ReservationData
 import com.example.madcamp_week1.db.contactRoom.ContactEntity
+import com.example.madcamp_week1.db.reservationRoom.ReservationDatabase
+import com.example.madcamp_week1.db.reservationRoom.ReservationEntity
+import com.example.madcamp_week1.db.restaurantRoom.RestaurantDatabase
 import com.example.madcamp_week1.ui.gallery.GalleryMapActivity
 import com.google.gson.Gson
+import kotlinx.coroutines.runBlocking
 
 class ReservationDetailActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityReservationDetailBinding
+    private lateinit var db: ReservationDatabase
 //    private lateinit var list: ArrayList<ContactData>
     private var list: ArrayList<ContactEntity> = ArrayList()
+    var rsid = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reservation_detail)
@@ -36,7 +44,13 @@ class ReservationDetailActivity : AppCompatActivity() {
 //            intent.getParcelableExtra("reservationData") as? ReservationData
 //        }
 
+        db = Room.databaseBuilder(
+            applicationContext,
+            ReservationDatabase::class.java, "reservationDB"
+        ).build()
+
 //        var resDate = data!!.date
+        rsid = intent.getIntExtra("rsid", -1)
         var restaurantName = intent.getStringExtra("restaurantName")
         var restaurantPhoto = intent.getStringExtra("restaurantPhoto")
         var restaurantPhone = intent.getStringExtra("restaurantPhone")
@@ -106,7 +120,13 @@ class ReservationDetailActivity : AppCompatActivity() {
                 return true
             }
             R.id.toolbar_delete -> {
-                TODO("delete operation")
+                val temp: ReservationEntity
+                if(rsid != -1) {
+                    runBlocking { temp = db.reservationDao().getById(rsid) }
+                    runBlocking { db.reservationDao().delete(temp) }
+                    Toast.makeText(this, "Successfully deleted!", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
             }
         }
         return super.onOptionsItemSelected(item)

@@ -75,7 +75,6 @@ class ReservationAddActivity : AppCompatActivity() {
         // Todo: Datatype 지정
         var dateVar: String = ""
         var restaurantVar: String = ""
-        var peopleListVar: String = ""
 
         // date 저장
         dateVar = date.year.toString()+"/"+(date.month+1).toString()+"/"+date.dayOfMonth.toString()
@@ -176,10 +175,7 @@ class ReservationAddActivity : AppCompatActivity() {
                             done.setBackgroundColor(Color.parseColor("#D0D0D0"))
                         }
                     }
-
                 }
-
-
             }
 
             builder.show()
