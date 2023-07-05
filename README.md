@@ -26,6 +26,8 @@ Madcamp_Week1
   <img src="https://github.com/EunsuKim03/Madcamp_Week1/assets/109589438/26bcf3bf-63a7-4e5e-a45e-d727021dc0b7">
   <figcaption align="center">3개 이미지 띄우기</figcaption>
 </p>
+
+
 **Tab2: 갤러리 탭**
 --------------
 > **MainActivity**: 실제 식당의 음식 사진, 이름, 주소, 전화 번호를 관리. 화면에 사진이 3열의 RecyclerView형태로 표시됨
@@ -54,6 +56,8 @@ Madcamp_Week1
   <img src="https://github.com/EunsuKim03/Madcamp_Week1/assets/109589438/03825f71-06ea-4882-9d42-eb1f64be8efa">
   <figcaption align="center">3개 이미지 띄우기</figcaption>
 </p>
+
+
 **Tab3: 자유 주제**
 ------------
 > **MainActivity**: Recyclerview 안에 날짜 별 약속들이 CardView 형태로 들어있음.
