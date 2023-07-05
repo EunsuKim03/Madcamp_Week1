@@ -25,6 +25,8 @@ class ContactAddActivity : AppCompatActivity() {
     private lateinit var binding : ActivityContactAddBinding
     private var imageUri: Uri? = null
 
+    var valid = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_add)
@@ -59,8 +61,10 @@ class ContactAddActivity : AppCompatActivity() {
                 nameVar = name.text.toString()
                 if ((nameVar != "") && (phoneVar != "")) {
                     done.setBackgroundColor(Color.parseColor("#6D7EFD"))
+                    valid = true
                 } else {
                     done.setBackgroundColor(Color.parseColor("#D0D0D0"))
+                    valid = false
                 }
             }
 
@@ -78,8 +82,10 @@ class ContactAddActivity : AppCompatActivity() {
                 phoneVar = phone.text.toString()
                 if ((nameVar != "") && (phoneVar != "")) {
                     done.setBackgroundColor(Color.parseColor("#6D7EFD"))
+                    valid = true
                 } else {
                     done.setBackgroundColor(Color.parseColor("#D0D0D0"))
+                    valid = false
                 }
             }
 
@@ -94,7 +100,7 @@ class ContactAddActivity : AppCompatActivity() {
 
         // Done button listener
         done.setOnClickListener {
-            if (imageUri != null) {
+            if (imageUri != null && valid) {
                 applicationContext.grantUriPermission(applicationContext.packageName, imageUri!!, Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 runBlocking { db.contactDao().insert(ContactEntity(nameVar, imageUri.toString(), phoneVar)) }
                 finish()

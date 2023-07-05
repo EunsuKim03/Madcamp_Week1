@@ -69,6 +69,8 @@
             android:drawableStart="@drawable/ic_gallery_map"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             />
 
         <TextView
@@ -81,6 +83,8 @@
             android:drawableStart="@drawable/ic_contact_call"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             />
 
     </LinearLayout>
