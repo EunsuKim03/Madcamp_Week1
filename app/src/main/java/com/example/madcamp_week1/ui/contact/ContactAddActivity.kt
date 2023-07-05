@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.telephony.PhoneNumberFormattingTextWatcher
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
@@ -64,6 +65,8 @@ class ContactAddActivity : AppCompatActivity() {
             }
 
         })
+
+        phone.addTextChangedListener(PhoneNumberFormattingTextWatcher())
 
         phone.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
